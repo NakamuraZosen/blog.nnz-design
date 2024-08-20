@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <title>【blender】海洋モディファイア（Ocean Modifier）を用いた海（動画向け）- nnz-blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#440088">
+  <meta name="keywords" content="マインクラフト,撮影,blender">
+  <meta name="description" content="なるべくシンプルで最小限の手順でオーシャンモディファイアを使った海の作り方を解説します。">
+  <link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-in wrap">
+      <a href="/" class="logo">nnz-blog</a>
+      <small>マインクラフトなどのゲーム動画配信者向けに、blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
+
+    </div>
+
+  </header>
+
+  <div id="content" class="content">
+    <div id="content-in" class="content-in wrap">
+      <main class="main">
+        <article class="article">
+          <header class="article-header">
+            <h1>【blender】海洋モディファイア（Ocean Modifier）を用いた海（動画向け）</h1>
+            <div class="eye-catch-wrap">
+            </div>
+
+          </header>
+          <div class="entry-content">
+            <div id="toc">
+
+            </div>
+            <figure class="wp-block-image">
+              <img src="#" alt="">
+            </figure>
+            <p>blenderで海を作るなら海洋モディファイア（Ocean Modifier）を使うのが一般的ですが、ベイク前提の機能ということもありとっつきにくい感があります。
+              そこで私は、以前の記事でノイズテクスチャを用いた静止画向けの海の作り方を紹介しました。</p>
+            <p>しかし、この作り方では波を動かせませんので動画の出力には向きません。波を動かすにはオーシャンモディファイアを使いこなすしかないのではないでしょうか。</p>
+            <p>
+              したがって今回、なるべくシンプルで最小限の手順でオーシャンモディファイアの使い方を記録しておきます。
+            </p>
+            <h2>概念の説明</h2>
+            <p>まず、海洋モディファイアという機能を利用して、波の様子を画像データとしてBake（書き出し）します。</p>
+            <p>続いて円盤を作成し、そこにベイクした波の様子をBake（焼きこみ）します。</p>
+            <p>見ての通り、書き出しも読み込みも「ベイク」という単語を使用しますが、わかりにくいのでこの記事では（）内の単語で統一することにします。</p>
+            <h2>本題</h2>
+            <h3>Bake（書き出し）</h3>
+            <p>最初に、プロジェクトを保存しておきます。今回は連番画像を出力しますので、何かフォルダを作ってからそこにプロジェクトを保存するのが良いと思います。</p>
+            <p>まずblenderを起動すると、いつもの立方体があります。今回はこれを消さず、左クリックで選択します。</p>
+            <p>画面右下、プロパティの中にスパナのマークのタブがあります。これがモディファイアプロパティです。続いて、 Add Modifiers > Ocean の順にクリックします。</p>
+            <figure class="wp-block-image">
+              <img src="#" alt="">
+            </figure>
+            <p>すると、立方体が海の形になったかと思います。続いて、つるつるとした波の少ない海を念頭にモディファイアのパラメーターを一気に設定していきます。
+              波を書き出したときの解像度は、ResolutionとSpatial Sizeできまりますので特に重要となります。また、Resolutionの数値によって波の見た目も大きく変わることに注意してください。</p>
+            <ul>
+              <li>Resolution Viewport: 32 (or 16) / Render: 32</li>
+              <li>Spatial Size（空間サイズ）: 200 m</li>
+              <li>Waves > Wind Velocity: 15 m/s</li>
+              <li>Waves > Alignment（配置）: 0.2</li>
+              <li>Waves > Damping: 0.75</li>
+              <li>Spectrum > Spectrum: Established Ocean (Sharp Peaks)（従来の海洋） </li>
+            </ul>
+            <figure class="wp-block-image">
+              <img src="#" alt="">
+            </figure>
+            <p>続いて、波がアニメーションするように設定していきます。タイムライン上の再生ボタンを押しても、波は動かないはずです。ここで、画面下のタイムラインにキーフレームを挿入します。
+              まず現在位置を0のところへドラッグし、先ほどまで調節していたモディファイアプロパティの中の Time の欄の横の点をクリックします。（数字の欄が黄色に変化します。）</p>
+            <p>続けてタイムラインの現在位置を240のところへドラッグし、 Time の欄に10と入力した上での横の点をクリックします。するとタイムライン上の0と240に黄色のひし形が現れます。</p>
+            <figure class="wp-block-image">
+              <img src="#" alt="">
+            </figure>
+            <p>このままですと、波がなだらかに動き始めてなだらかに停止してしまうので、動きを変更します。
+              キーフレームが白くなってしまった場合、Shift+クリックで選択してください。続いてタイムライン上で右クリックし、Interpolation Mode > Linear（左端の列）をクリックしてください。
+              連続的に動いていたら正解です。動作が重たい場合はResolution Viewportを下げてください。</p>
+              <figure class="wp-block-image">
+                <img src="#" alt="">
+              </figure>
+            <p>最後に、 Bake > Cash Pathに連番画像を出力したいフォルダを作り、指定しておきます。
+              Frame start: 0 / End: 240として、ひとまず10秒分ベイクしてみます。Bake Oceanをクリックしてください。 </p>
+              <figure class="wp-block-image">
+                <img src="#" alt="">
+              </figure>
+            <p>するとdisp_0000.exr等という名前の4 MB程度のファイルが240個生成されます。</p>
+            <h3>海の円盤を作成</h3>
+            <p>上で使ったモディファイアの海面はもう不要ですので、アウトライナーで目とカメラのアイコンをクリックして非表示にしておいてください。（消してしまっても構いません。）消してください。
+              消さないと裏で処理が走りますのでBlenderが異常に重くなります。</p>
+            <p>shift+aでMesh > Circleを選びます。すると、輪っかが出現すると同時に画面左下にメニューが出てくるので、これをクリックします。Fill Type: Triangle Fan、Radius: 1000 mに変更しておきます。</p>
+            <figure class="wp-block-image">
+              <img src="#" alt="">
+            </figure>
+            <p>ウィンドウの一番上を見ると、現在は"Layout"タブに居るのがわかるでしょうか。これを"Shading"タブに切り替えます。すると画面下にノードエディターが現れるので、ここでノードを組んでいきます。
+              <br>改めて、円盤が選択されていることを確認してください。次に、Shader Editor 上の+Newというボタンを押すと、Material.001というマテリアルが生成されると同時にPrincipled BSDF ノードが生成されます。</p>
+            <p>Principled BSDF のBase Colorを黒に、Roughness（粗さ）を0にします。すると鏡のように景色が反射します。</p>
+            <figure class="wp-block-image">
+              <img src="#" alt="">
+            </figure>
+            <h3>Bake（焼きこみ）</h3>
+            <p>書き出した画像を、この円盤に焼きこみます。</p>
+            <p>Shader Editor上で、Image Texture ノード、Mappingノード、Texture Coordinate（テクスチャ座標）ノードを追加し、以下のように繋ぎます。 </p>
+            <ul>
+              <li>Texture Coordinate のUV からMapping のVectorへ</li>
+              <li>Mapping のVectorからImage TextureのVectorへ</li>
+              <li>Image TextureのColorからMaterial Output のDisplacementへ </li>
+            </ul>
+            <p>Image Textureノードに画像を読み込みます。Open > 書き出した連番画像のフォルダを開き、aを押して全選択してOpen Imageをクリック。更にAuto Refreshにチェックを入れて置きます。</p>
+            <p>最後に、テクスチャのスケールを合わせるため、Mappingノードの SaleをX=10, Y=10とします。これでシェーダーは完成です。下の画像のようになっていなければやり直してください。s</p>
+          </div>
+        </article>
+      </main>
+      <div id="sidebar" class="sidebar">
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer">
+    <div class="footer-in wrap">
+      <span class="copyright">© 2022 nnz-design.</span>
+
+    </div>
+
+  </footer>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
