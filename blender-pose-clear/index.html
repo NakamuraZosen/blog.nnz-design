@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <title>【blender】ポーズをクリアユーザートランスフォームで戻せないとき- nnz-blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#440088">
+  <meta name="keywords" content="キャラクター,モデリング,アニメーション,blender">
+  <meta name="description" content="アニメーションの製作中、ポーズをもとに戻したい事が多々ありますが、'Clear User Transform' で戻せなくて困ります。戻し方を、ケースごとに考えました。">
+  <link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-in wrap">
+      <a href="/" class="logo">nnz-blog</a>
+      <small>マインクラフトなどのゲーム動画配信者向けに、blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
+
+    </div>
+
+  </header>
+
+  <div id="content" class="content">
+    <div id="content-in" class="content-in wrap">
+      <main class="main">
+        <article class="article">
+          <header class="article-header">
+            <h1>【blender】ポーズをクリアユーザートランスフォームで戻せないとき</h1>
+            <div class="eye-catch-wrap">
+            </div>
+
+          </header>
+          <div class="entry-content">
+            <figure class="wp-block-image">
+              <img src="1.jpg" alt="">
+            </figure>
+            <p>ポーズを動かしてキーフレームを打つと、「クリアユーザートランスフォーム」で初期ポーズ（レストポーズ。編集モードで作ったときのボーン。）に戻せなくなります。</p>
+            <p>こんな時は、ボーンを選択してから、Alt+Gで位置をリセット、Alt+Rで回転をリセット、Alt+Sでスケールをリセットできます。</p>
+
+              <div id="toc" class="toc">
+                <span class="toc-title">目次</span>
+
+              </div>
+            <h2>モデリング中にポーズを戻したいとき</h2>
+            <figure class="wp-block-image">
+              <img src="2.jpg" alt="">
+            </figure>
+            <p>アウトライナーのアーマーチュアオブジェクトの三角をクリックして展開すると、その下に「Animation」という項目が増えています。
+              これを右クリックしてClear Animation Dataをクリックすると、ポーズモード上で「クリアユーザートランスフォーム」が使えるようになります。</p>
+            <p>追記：Animationを削除するならそれを後で元に戻す方法も知っておかなければなりません。</p>
+            <h2>アニメーション作成中にポーズを戻したいとき</h2>
+            <p>上記のようにした後、アクションエディターに入ると再びポーズをとってしまいます。何が起っているのかというと、ボーンプロパティのトランスフォームに数値が入っています。
+              下の画像の黄色い部分の数字です。これはAlt+GやAlt+Rで戻せます。しかし、毎回これをするのは面倒ですよね。</p>
+            <figure class="wp-block-image">
+              <img src="3.jpg" alt="">
+            </figure>
+            <p>ですので初期ポーズのアクションを一つ作っておくのがお薦めです。
+              <br>
+              ポーズをもとに戻した後、ボーンをAで全選択してiキーでキーフレームを打ちます。こうしておくと、次にキーフレームの無いアクションに移動したとき初期ポーズがキープされます。</p>
+            <figure class="wp-block-image">
+              <img src="4.jpg" alt="">
+            </figure>
+            <h2>unityに持っていくとき</h2>
+            <p>
+              unityにもっていくならどこかにTポーズが無いといけませんから、Tポーズのアクションを最初に作っておくのがよさそうです。
+              出力時にNLAにTポーズのアクションを置いておけばunityでHumanoidを適用したときにピッタリになります。これなら0フレーム目にTポーズを入れる必要は無くなります。
+            </p>
+          </div>
+        </article>
+      </main>
+      <div id="sidebar" class="sidebar">
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer">
+    <div class="footer-in wrap">
+      <span class="copyright">© 2022 nnz-design.</span>
+
+    </div>
+
+  </footer>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
