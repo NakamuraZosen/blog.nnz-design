@@ -6,7 +6,6 @@
   <title>nnz-blog</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#440088">
   <meta name="keywords" content="マインクラフト,撮影,blender">
   <meta name="description" content="なるべくシンプルで最小限の手順でオーシャンモディファイアを使った海の作り方を解説します。">
   <link href="./css/style.css" rel="stylesheet">
@@ -17,21 +16,16 @@
 
   <div id="content" class="content">
     <div id="content-in" class="content-in wrap">
+
       <main class="main list-home">
         <h1 class="list-title">新着記事</h1>
-        <a href="./ocean-modifier/index.html">
-          <article class="article">
-            <figure class="entry-card-thumb">
-              <img src="ocean-modifier/1.jpg" alt="">
-            </figure>
-            <h2 class="card-title">【blender】海洋モディファイア（Ocean Modifier）を用いた海（動画向け）</h2>
-          </article>
-        </a>
+        <div id="list-new-entries" class="list-new-entries">
+
+        </div>
       </main>
+
       <div id="sidebar" class="sidebar">
-        <aside class="aside">
-          <h3>新着記事</h3>
-        </aside>
+
         <aside class="aside widget_author_box">
           <div class="author-box">
             <figure class="author-thum">
@@ -45,7 +39,18 @@
                 <a href="https://twitter.com/NHI_nakamura">Twitter (𝕏)</a>
               </div>
             </div>
+          </div>
+        </aside>
 
+        <aside class="aside">
+          <h3 class="widget-title">新着記事</h3>
+          <div class="list-new-entries">
+            <a href="#" class="new-entry">
+              <figure class="entry-card-thumb">
+                <img src="ocean-modifier/1.jpg" alt="">
+              </figure>
+              <span class="card-title">【blender】海洋モディファイア（Ocean Modifier）を用いた海（動画向け）</span>
+            </a>
           </div>
         </aside>
 
@@ -61,6 +66,7 @@
     </div>
 
   </footer>
+  <script src="js/script-home.js"></script>
 </body>
 
 </html>
