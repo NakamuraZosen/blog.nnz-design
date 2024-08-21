@@ -33,9 +33,6 @@
 
           </header>
           <div class="entry-content">
-            <div id="toc">
-
-            </div>
             <figure class="wp-block-image">
               <img src="1.jpg" alt="">
             </figure>
@@ -45,6 +42,11 @@
             <p>
               したがって今回、なるべくシンプルで最小限の手順でオーシャンモディファイアの使い方を記録しておきます。
             </p>
+
+              <div id="toc" class="toc">
+                <span class="toc-title">目次</span>
+
+              </div>
             <h2>概念の説明</h2>
             <p>まず、海洋モディファイアという機能を利用して、波の様子を画像データとしてBake（書き出し）します。</p>
             <p>続いて円盤を作成し、そこにベイクした波の様子をBake（焼きこみ）します。</p>
@@ -80,12 +82,12 @@
               キーフレームが白くなってしまった場合、Shift+クリックで選択してください。続いてタイムライン上で右クリックし、Interpolation Mode > Linear（左端の列）をクリックしてください。
               連続的に動いていたら正解です。動作が重たい場合はResolution Viewportを下げてください。</p>
               <figure class="wp-block-image">
-                <img src="#" alt="">
+                <img src="5.jpg" alt="">
               </figure>
             <p>最後に、 Bake > Cash Pathに連番画像を出力したいフォルダを作り、指定しておきます。
               Frame start: 0 / End: 240として、ひとまず10秒分ベイクしてみます。Bake Oceanをクリックしてください。 </p>
               <figure class="wp-block-image">
-                <img src="#" alt="">
+                <img src="6.jpg" alt="">
               </figure>
             <p>するとdisp_0000.exr等という名前の4 MB程度のファイルが240個生成されます。</p>
             <h3>海の円盤を作成</h3>
@@ -93,13 +95,13 @@
               消さないと裏で処理が走りますのでBlenderが異常に重くなります。</p>
             <p>shift+aでMesh > Circleを選びます。すると、輪っかが出現すると同時に画面左下にメニューが出てくるので、これをクリックします。Fill Type: Triangle Fan、Radius: 1000 mに変更しておきます。</p>
             <figure class="wp-block-image">
-              <img src="#" alt="">
+              <img src="7.jpg" alt="">
             </figure>
             <p>ウィンドウの一番上を見ると、現在は"Layout"タブに居るのがわかるでしょうか。これを"Shading"タブに切り替えます。すると画面下にノードエディターが現れるので、ここでノードを組んでいきます。
               <br>改めて、円盤が選択されていることを確認してください。次に、Shader Editor 上の+Newというボタンを押すと、Material.001というマテリアルが生成されると同時にPrincipled BSDF ノードが生成されます。</p>
             <p>Principled BSDF のBase Colorを黒に、Roughness（粗さ）を0にします。すると鏡のように景色が反射します。</p>
             <figure class="wp-block-image">
-              <img src="#" alt="">
+              <img src="8.jpg" alt="">
             </figure>
             <h3>Bake（焼きこみ）</h3>
             <p>書き出した画像を、この円盤に焼きこみます。</p>
@@ -110,7 +112,82 @@
               <li>Image TextureのColorからMaterial Output のDisplacementへ </li>
             </ul>
             <p>Image Textureノードに画像を読み込みます。Open > 書き出した連番画像のフォルダを開き、aを押して全選択してOpen Imageをクリック。更にAuto Refreshにチェックを入れて置きます。</p>
-            <p>最後に、テクスチャのスケールを合わせるため、Mappingノードの SaleをX=10, Y=10とします。これでシェーダーは完成です。下の画像のようになっていなければやり直してください。s</p>
+            <p>最後に、テクスチャのスケールを合わせるため、Mappingノードの SaleをX=10, Y=10とします。これでシェーダーは完成です。下の画像のようになっていなければやり直してください。</p>
+            <figure class="wp-block-image">
+              <img src="9.jpg" alt="">
+            </figure>
+            <h2>カメラの設定とレンダリング</h2>
+            <h3>背景の設定</h3>
+            <p>まず、背景の設定です。Layout タブに戻ります。</p>
+            <p>
+              画面右上の球体が四つ並んでいる中の一番右を選択してレンダーモードにしておきます。これがレンダリング結果になるのですが、背景が無くなり真っ暗になったのではないでしょうか。
+              今回は背景を作るために環境テクスチャを利用しますので、まずは背景となる画像を用意しなければなりません。
+              画像は下記のWebサイトから入手しました。画面右下（Properties）の地球儀のタブ（World）を開いて、Colorの横の点をクリックし、Environmental Texture（環境テクスチャ）を選択します。
+              すると、その下にOpen（フォルダを開く）が出現するので、先ほどダウンロードした画像を選択します。すると、空が現れます。
+            </p>
+            <p>
+              環境テクスチャ入手先です。今回は4k, HDRを使用しました。
+              <a href="https://polyhaven.com/a/table_mountain_1_puresky">https://polyhaven.com/a/table_mountain_1_puresky</a>
+            </p>
+            <figure class="wp-block-image">
+              <img src="10.jpg" alt="">
+            </figure>
+            <h3>撮影の前の確認</h3>
+            <p>カメラの設定に進む前に、諸設定を済ませておきます。被写体を置きたい場合は置いておいてください。</p>
+            <p>まず3Dビューポート上の視界を広くします。3Dビューポート上でNキーを押してサイドバーを出し、ViewタブのClip Start / End のEndの方に0をひとつ足します。</p>
+            <p>また、再生ボタンを押して波がちゃんと動くことを確認しておきます。</p>
+            <h3>カメラの設定</h3>
+            <p>次にカメラの設定です。画面右上のアウトライナーからカメラを選びます。すると、プロパティにカメラアイコンのタブが出現しますのでクリックします。Lensの中のClip Start / EndのEndに0を一つ追加します。</p>
+            <figure class="wp-block-image">
+              <img src="11.jpg" alt="">
+            </figure>
+            <h3>影と雰囲気の設定（eevee 向け）</h3>
+            <p>eevee を使うなら光源が無いと影が出ません。ですので、環境テクスチャの明るさを下げ、光源としてSunを使用します。Light（ライト）を選択してから、以下のように設定します。
+              Cyclesを使うなら特に設定の必要はありません。</p>
+            <ul>
+              <li>World（地球儀） > Surface > Strength: 0.5 </li>
+              <li>Object Data Properties（電球）> Light > Type: Sun</li>
+              <li>Object Data Properties（電球）> Light >  Strength: 10</li>
+              <li>Object Data Properties（電球）> Shadow: チェック</li>
+              <li>Object Data Properties（電球）> Shadow > Cascaded Shadow Map > Max distance: 2000 m</li>
+              <li>Render（上から二番目） > Shadows > Soft Shadows: チェックを外す</li>
+            </ul>
+            <p>他にもレンダープロパティを設定しておきます。AOは隙間影、Bloomは光のにじみを表します。</p>
+            <ul>
+              <li>Render（上から二番目） > Ambient Occlusion: チェック</li>
+              <li>Render > Ambient Occlusion > Distance: 10 m</li>
+              <li>Render > Ambient Occlusion > Factor: 4 m（直接入力します）</li>
+              <li>Render > Ambient Occlusion > Bounces Approximation: チェックを外す</li>
+              <li>Render > Bloom: チェック</li>
+              <li>Render > Screen Space Reflections: チェック</li>
+            </ul>
+            <h3>霧の設定</h3>
+            <p>更に雰囲気を出したいなら、霧の設定が有効です。設定中、一時的に真っ暗になったり真っ白になったりします。</p>
+            <ul>
+              <li>World（地球儀） > Volume > Volume: Volume Scatter</li>
+              <li>Render（上から二番目） > Volumetrics > Start: 100 m / End: 1500 m</li>
+              <li>World（地球儀） > Volume > Density: 0.001</li>
+              <li>World（地球儀） > Volume > Color: 明度を半分程度にし、少し青に寄せる。</li>
+            </ul>
+            <figure class="wp-block-image">
+              <img src="12.jpg" alt="">
+            </figure>
+            <h3>レンダリング</h3>
+            <p>カメラの位置と向きを調節してレンダリングしてみましょう。画面一番上の左端、Render > Render Imageをクリックすると現在のフレームの静止画が別窓に出力されます。
+              これで問題が無ければ動画の出力を行いましょう。また右下のPropertiesで設定を行います。</p>
+            <ul>
+              <li>Output（上から3番目）> 出力したいフォルダを選ぶ</li>
+              <li>Output > File Format: FFmpeg Video</li>
+              <li>Output >Encoding > Container: MPEG-4（.mkvでもAviUtlで読み込めますよ）</li>
+            </ul>
+            <figure class="wp-block-image">
+              <img src="13.jpg" alt="">
+            </figure>
+            <p>動画を書き出すには、画面一番上の左端、Render > Render Animationをクリックします。</p>
+            <p>書き出された動画のファイル名はすぐに変更しましょう。同じ名前で書きだそうとすると、問答無用で上書きされます。（覚えてろよ…）</p>
+            <h2>そのあと</h2>
+            <p>今回作った海の映像を載せておきます。</p>
+            <p>もっと長い映像が良ければ、モディファイアをベイクするときに必要な分だけ書き出してください。書き出した後は焼きこみのシェーダーで画像を選択しなおすのを忘れずに。</p>
           </div>
         </article>
       </main>
