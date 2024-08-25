@@ -12,8 +12,25 @@ sidebar.insertAdjacentHTML('afterbegin', `
       <p class="author-name">プロフィール</p>
       <div class="author-description">
         <p>活動場所</p>
-        <a href="https://www.youtube.com/channel/UCzB8_PC3Siup1Zai8EfJC2g">YouTube</a>
-        <a href="https://twitter.com/NHI_nakamura">Twitter (𝕏)</a>
+        <a href="https://www.youtube.com/channel/UCzB8_PC3Siup1Zai8EfJC2g" target="_blank" rel="noopener noreferrer" class="link-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 576 512">
+            <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <path d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"/>
+          </svg>
+        </a>
+        <a href="https://twitter.com/NHI_nakamura" target="_blank" rel="noopener noreferrer" class="link-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512">
+            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+          </svg>
+        </a>
+        <p>サイトの不具合等を報告</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdh8NzM_RGn50L5WsNhh13nltpO50aodwJcDDqJiKV-cVgtsA/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer" >
+          Google forms
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 -960 960 960">
+            <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/>
+          </svg>
+        </a>
       </div>
     </div>
   </div>
