@@ -7,7 +7,7 @@ body {
   --c: #333;
   --c-heading: #440088;
   --c-border: darkgray;
-  --c-hover: lightgray;
+  --c-hover: #440088;
   --main-color: #440088;
   --gap30: 30px;
 }
@@ -61,6 +61,7 @@ header ul, footer ul{
 .article h1, .article h2, .article h3, .article h4, .article h5, .article h6 {
     line-height: 1.25;
     font-weight: bold;
+    letter-spacing: .1rem;
 }
 .article h2 {
   margin: calc(var(--gap30)* 3) 0 var(--gap30) 0;
@@ -98,17 +99,24 @@ main {
     background-color: var(--c-bg-base);
     box-sizing: border-box;
 }
+.entry-date {
+  display: block;
+  margin-bottom: 1.5em;
+  font-size: .8em;
+  letter-spacing: .2rem;
+}
 .toc {
+    min-height: 20em;
     background-clip: padding-box;
     background-color: var(--c-bg-neutral);
     border: 0;
     border-bottom: 4px double silver;
     border-top: 4px double silver;
     padding: var(--gap30);
+
+    letter-spacing: .1rem;
 }
 .toc a {
-
-
   text-decoration: none;
   color:  var(--c) ;
 }
@@ -198,15 +206,24 @@ img {
   background-color: gray;
   object-fit: cover;
 }
+svg {
+  fill: var(--c);
+  vertical-align: inherit;
+}
 .wp-block-image {
   margin: 0;
 }
 .wp-block-image img {
-  display: block;
   box-sizing: border-box;
-  vertical-align: bottom;
-  min-height: 200px;
-  width: 710px;
+  display: block;
+  margin: auto;
+  border: 1px solid silver;
+  border-radius: 10px;
+
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: 50em;
+  height: auto;
 }
 .author-content {
   padding: var(--gap30);
@@ -216,6 +233,10 @@ img {
 }
 .author-content p {
   margin: 0;
+}
+.link-icon {
+  padding: .1em;
+  text-decoration: none;
 }
 .author-description {
   text-align: left;
@@ -269,19 +290,27 @@ img {
   font-size: 16px;
   text-align: center;
 }
+.list-new-entries {
+}
 .list-home .new-entry {
   padding: 15px;
   margin-bottom: 15px;
   gap: 15px;
-  background-color:  var(--c-bg-base);
+  background-color: var(--c-bg-base);
   border-radius: 10px;
+  border: 2px solid var(--c-bg-base);
   color: var(--c);
 
   display: flex;
 
   text-decoration: none;
+  transition: .1s;
 }
- .list-home .card-title {
+.list-home .new-entry:hover {
+  border: 2px solid var(--c-hover);
+  transition: .1s;
+}
+.list-home .card-title {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
