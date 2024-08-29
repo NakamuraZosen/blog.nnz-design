@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <title>【blender】マインクラフトの作品をblenderで撮影する手順【eevee篇】- nnz-blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#440088">
+  <meta name="keywords" content="撮影,変換,minecraft,blender,mineways">
+  <meta name="description" content="マインクラフトの作品をblenderで撮影する手順を開設">
+  <link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-in wrap">
+      <a href="/" class="logo">nnz-blog</a>
+      <small>マインクラフトなどのゲーム動画配信者向けに、blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
+
+    </div>
+
+  </header>
+
+  <div id="content" class="content">
+    <div id="content-in" class="content-in wrap">
+      <main class="main">
+        <article class="article">
+          <header class="article-header">
+            <h1>【blender】マインクラフトの作品をblenderで撮影する手順【eevee篇】</h1>
+            <time datetime="2023-09-27" class="entry-date">2023.09.27</time>
+            <div class="eye-catch-wrap">
+              <figure class="wp-block-image">
+                <img src="resized/1.jpg" alt="">
+              </figure>
+            </div>
+          </header>
+
+          <div class="entry-content">
+            <p>マインクラフトの影MODって、下手な外部レンダリングより綺麗ですよね。</p>
+            <p>TwitterではChunkyやblender等の外部のソフトで撮影したスクショが良く伸びています。もちろんこれらはバニラのスクショより綺麗です。でも、影MODの方が綺麗ではないですか？</p>
+            <p>と思ったので、今回はblenderで影MODを超えることを目標に試行錯誤してみました。 今回、背景にうっすらと反射する床を作っていますが、マイクラ風の背景を作りたい方は地面ごとエクスポートしてください。 </p>
+
+              <div id="toc" class="toc">
+                <span class="toc-title">目次</span>
+
+              </div>
+            <h2>作品を3Dデータにして読み込み（前準備）</h2>
+            <p>まず、マインクラフトのワールドデータから作品を3Dに変換しなければいけませんね。変換に使えるソフトはMinewaysかJmc2objがありますが、今回はMinewaysを使用します。ダウンロードしておいてください。 </p>
+            <a href="https://github.com/erich666/Mineways/releases" target="_blank" rel="noopener noreferrer">https://github.com/erich666/Mineways/releases</a>
+            <p>
+              起動したら、File > Open World > Find Your World の順にクリック、するとファイルダイアログが出るので、ワールドデータのフォルダを探します。
+              ここからが忘れやすいのですが、ワールドデータのフォルダが見つかったら、その中の level.dat を開きます。これが最初に読み込まれるファイルになります。
+            </p>
+            <p>
+              ワールドデータが見つからない方は、C:/ユーザー/PCの名前/AppData/Roaming/.minecraftの順にクリックしてみてください。
+              このうちAppDataは一度エクスプローラーを起動して"表示"タブの中の隠しファイルにチェックを入れていないと見えませんので注意。
+            </p>
+            <p>ワールドが読み込まれたら、右クリックでドラッグして範囲選択してからDepthのスライダーを動かして地面が入らないようにします。</p>
+            <a class="wp-block-image" href="original/2.jpg">
+              <img src="resized/2.jpg" alt="">
+            </a>
+            <p>
+            範囲選択が終わったら、File > Export for Rendering をクリックします。するとまたファイルダイアログが開くので、まず作品名のフォルダを作ってから、その中にまた作品名を入れて保存をクリックします。
+            （objファイル以外にもいろいろ生成されるからです）（拡張子は自動で付くので入力しなくていいです）
+            </p>
+            <p>すると何やら設定画面が表示されますが、気にせずOKをクリックします。（別の記事で設定項目の解説をします）</p>
+            <a class="wp-block-image" href="original/3.jpg">
+              <img src="resized/3.jpg" alt="">
+            </a>
+            <h2>blender</h2>
+            <h3>ワールドの設定</h3>
+            <p>blenderを起動すると、やはりいつもの立方体があるのでXキーで消しておきます。まず床を作りたいので、すかさずshift+aでMeshを選び、Plane（板）を追加します。左下に現れたメニューをクリックして、サイズを1000にします。</p>
+            <a class="wp-block-image" href="original/4.jpg">
+              <img src="resized/4.jpg" alt="">
+            </a>
+            <p>
+              次に、画面右上の球体が四つ並んでいるところの右端をクリックしてレンダービューにします。背景が真っ暗なので、画面右のピンクの地球儀マーク（ワールドプロパティ）のカラーをグレーくらいに上げておきます。
+            </p>
+            <a class="wp-block-image" href="original/5.jpg">
+              <img src="resized/5.jpg" alt="">
+            </a>
+            <h3> 作品のインポート</h3>
+            <p>File > Import > Wavefront (.obj) の順にクリックし、先ほど変換したデータの obj ファイルを開きます。しばらく待ち、ズームアウトすると作品がインポートされています。（マテリアル情報は一歩遅れて適用されます。</p>
+            <a class="wp-block-image" href="original/6.jpg">
+              <img src="resized/6.jpg" alt="">
+            </a>
+            <p>あれ？ノッペリしてるぞ！？</p>
+            <h3>光源の設定 </h3>
+            <p>
+              Eevee は光源が無いと影が落ちません。ということで、最初から設置されていたLightオブジェクトを作品の少し上に移動させ、設定を変更します。
+              右上のオブジェクト一覧（アウトライナー）からLightを選択し、3Dビューポート上で G > Z の順にキーを押下し、マウスを上下に移動させると光源が動きます。
+            </p>
+            <a class="wp-block-image" href="original/7.jpg">
+              <img src="resized/7.jpg" alt="">
+            </a>
+            <p>
+              続いて光源の設定をします。画面右の緑の電球マークをクリックし、Lightの中の光源の種類をSunに、強さを10程度に、そしてその下のShadowにチェックを入れ、一番下のDistributionを0にします。
+              Distributionの数値を大きくすると、遠くに落ちている影が簡略化されます。
+              また、3Dビューポート上の光源から出ている線の先にある黄色い点をドラッグすることで光の向きを変えられます。（Sunの場合、光源そのものの位置を変えても変化はありません。）
+            </p>
+            <a class="wp-block-image" href="original/8.jpg">
+              <img src="resized/8.jpg" alt="">
+            </a>
+            <h3>レンダリングの設定</h3>
+            <p>レンダープロパティの設定です。画面右のアイコンが縦に並んでいるところの上の方にあるカメラのようなアイコンをクリックします。
+              Ambient Occlusion (AO) にチェックを入れ、距離を10m、Factor（係数）を2から4程度に、Bounces Approximationのチェックを外します。
+              （AOとは濃い目の隙間影を追加する処理です）さらに下の方の項目に移動し、ShadowsのCascade Sizeを4096pxに、Soft Shadowsのチェックを外します。床に反射させたい場合はScreen Space Reflectionsにチェックを入れます。
+            </p>
+            <a class="wp-block-image" href="original/9.jpg">
+              <img src="resized/9.jpg" alt="">
+            </a>
+            <h3>床の設定</h3>
+            <p>トップ画像のように、床を反射させてみます。Planeを選択し、画面右のピンクのチェッカーフラッグ柄の球体のアイコンをクリックすると、+Newの横にも同じアイコンがあるのでクリックします。
+              検索窓を使い、"Material"を探し、クリックします。
+            </p>
+            <a class="wp-block-image" href="original/10.jpg">
+              <img src="resized/10.jpg" alt="">
+            </a>
+            <p>すると設定項目が沢山現れるので、Base Color の白い部分をクリックして背景と同じくらいのグレーに、下の方に行ってRoughness（粗さ）を0にします。
+              この時点でかなり反射したと思いますが、最後にMetallicの数値を上げて行き、反射の度合いを調節します。
+            </p>
+            <a class="wp-block-image" href="original/11.jpg">
+              <img src="resized/11.jpg" alt="">
+            </a>
+            <p>こんな感じになったでしょうか。なっていなければ何かを忘れています。一からやり直した方が早いかも。</p>
+            <h3>カメラの設定</h3>
+            <p>カメラを選択した後、Gキーを押して好きな位置に移動させます。画面右上の方にあるカメラアイコンをクリックするとカメラからの視点で操作できます。
+              画面上でNキーを押してサイドバーを表示させ、Location Rotation の数値をマウスでドラッグして動かしたり、サイドバーのViewタブに移動して View Lock の Camera to View にチェックを入れると視点操作とカメラの動きが連動します。
+            </p>
+            <p>
+              画面右の緑のカメラアイコンをクリックして、Viewport Display項目のSizeを10くらいにするとカメラが大きく表示されます。（レンダリング結果には影響しません。）
+              また、作品が大きいとレンダリング範囲から出てしまうので、Lens項目の中のClip Start / End のEndに0をひとつ追加しておきます。
+            </p>
+            <a class="wp-block-image" href="original/12.jpg">
+              <img src="resized/12.jpg" alt="">
+            </a>
+            <p>カメラの画角を変えるにはFocal Length（焦点距離）を変えるのですが、あまり広角にするとかっこ悪いので無難な50mmがおすすめです。</p>
+            <h3>ようやくレンダリング</h3>
+            <p>カメラの位置が決まったら、画面上でF12キーを押してレンダリングします。</p>
+            <a class="wp-block-image" href="original/13.jpg">
+              <img src="resized/13.jpg" alt="">
+            </a>
+            <p>以上です。</p>
+            <p>何？船底が反射していないって？そんなに反射させたければCyclesを使いましょう。</p>
+            <h2>発展</h2>
+            <p>海での撮影方法です。こちらでは今回の解説に加えて、環境テクスチャで空を作ったり、霧を立ち込めさせたりしています。もちろん、海の作り方も解説しています。</p>
+            <a href="https://nakamurazosen.blogspot.com/2023/09/blog-post_26.html" target="_blank" rel="noopener noreferrer">https://nakamurazosen.blogspot.com/2023/09/blog-post_26.html</a>
+            <p>Minewaysの設定項目の解説記事はその内書きます。</p>
+          </div>
+        </article>
+      </main>
+      <div id="sidebar" class="sidebar">
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer">
+    <div class="footer-in wrap">
+      <span class="copyright">© 2022 nnz-design.</span>
+
+    </div>
+
+  </footer>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
