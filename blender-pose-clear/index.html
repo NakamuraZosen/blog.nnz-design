@@ -30,13 +30,13 @@
             <h1>【blender】ポーズをクリアユーザートランスフォームで戻せないとき</h1>
             <time datetime="2023-10-17" class="entry-date">2023.10.17</time>
             <div class="eye-catch-wrap">
+              <figure class="wp-block-image">
+                <img src="resized/1.webp" alt="">
+              </figure>
             </div>
-
           </header>
+
           <div class="entry-content">
-            <figure class="wp-block-image">
-              <img src="1.jpg" alt="">
-            </figure>
             <p>ポーズを動かしてキーフレームを打つと、「クリアユーザートランスフォーム」で初期ポーズ（レストポーズ。編集モードで作ったときのボーン。）に戻せなくなります。</p>
             <p>こんな時は、ボーンを選択してから、Alt+Gで位置をリセット、Alt+Rで回転をリセット、Alt+Sでスケールをリセットできます。</p>
 
@@ -45,24 +45,24 @@
 
               </div>
             <h2>モデリング中にポーズを戻したいとき</h2>
-            <figure class="wp-block-image">
-              <img src="2.jpg" alt="">
-            </figure>
+            <a class="wp-block-image" href="original/2.jpg">
+              <img src="resized/2.webp" alt="">
+            </a>
             <p>アウトライナーのアーマーチュアオブジェクトの三角をクリックして展開すると、その下に「Animation」という項目が増えています。
               これを右クリックしてClear Animation Dataをクリックすると、ポーズモード上で「クリアユーザートランスフォーム」が使えるようになります。</p>
             <p>追記：Animationを削除するならそれを後で元に戻す方法も知っておかなければなりません。</p>
             <h2>アニメーション作成中にポーズを戻したいとき</h2>
             <p>上記のようにした後、アクションエディターに入ると再びポーズをとってしまいます。何が起っているのかというと、ボーンプロパティのトランスフォームに数値が入っています。
               下の画像の黄色い部分の数字です。これはAlt+GやAlt+Rで戻せます。しかし、毎回これをするのは面倒ですよね。</p>
-            <figure class="wp-block-image">
-              <img src="3.jpg" alt="">
-            </figure>
+            <a class="wp-block-image" href="original/3.jpg">
+              <img src="resized/3.webp" alt="">
+            </a>
             <p>ですので初期ポーズのアクションを一つ作っておくのがお薦めです。
               <br>
               ポーズをもとに戻した後、ボーンをAで全選択してiキーでキーフレームを打ちます。こうしておくと、次にキーフレームの無いアクションに移動したとき初期ポーズがキープされます。</p>
-            <figure class="wp-block-image">
-              <img src="4.jpg" alt="">
-            </figure>
+            <a class="wp-block-image" href="original/4.jpg">
+              <img src="resized/4.webp" alt="">
+            </a>
             <h2>unityに持っていくとき</h2>
             <p>
               unityにもっていくならどこかにTポーズが無いといけませんから、Tポーズのアクションを最初に作っておくのがよさそうです。
