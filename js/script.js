@@ -72,6 +72,7 @@ function populateEntryList(obj) {
 
     const img = document.createElement("img");
     img.src = ".." + obj[i].thumbnail;
+    img.alt = "thumbnail";
 
     const span = document.createElement("span");
     span.textContent = obj[i].title;
