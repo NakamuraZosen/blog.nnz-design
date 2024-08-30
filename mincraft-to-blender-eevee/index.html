@@ -31,7 +31,7 @@
             <time datetime="2023-09-27" class="entry-date">2023.09.27</time>
             <div class="eye-catch-wrap">
               <figure class="wp-block-image">
-                <img src="resized/1.jpg" alt="">
+                <img src="resized/1.webp" alt="">
               </figure>
             </div>
           </header>
@@ -58,7 +58,7 @@
             </p>
             <p>ワールドが読み込まれたら、右クリックでドラッグして範囲選択してからDepthのスライダーを動かして地面が入らないようにします。</p>
             <a class="wp-block-image" href="original/2.jpg">
-              <img src="resized/2.jpg" alt="">
+              <img src="resized/2.webp" alt="">
             </a>
             <p>
             範囲選択が終わったら、File > Export for Rendering をクリックします。するとまたファイルダイアログが開くので、まず作品名のフォルダを作ってから、その中にまた作品名を入れて保存をクリックします。
@@ -66,24 +66,24 @@
             </p>
             <p>すると何やら設定画面が表示されますが、気にせずOKをクリックします。（別の記事で設定項目の解説をします）</p>
             <a class="wp-block-image" href="original/3.jpg">
-              <img src="resized/3.jpg" alt="">
+              <img src="resized/3.webp" alt="">
             </a>
             <h2>blender</h2>
             <h3>ワールドの設定</h3>
             <p>blenderを起動すると、やはりいつもの立方体があるのでXキーで消しておきます。まず床を作りたいので、すかさずshift+aでMeshを選び、Plane（板）を追加します。左下に現れたメニューをクリックして、サイズを1000にします。</p>
             <a class="wp-block-image" href="original/4.jpg">
-              <img src="resized/4.jpg" alt="">
+              <img src="resized/4.webp" alt="">
             </a>
             <p>
               次に、画面右上の球体が四つ並んでいるところの右端をクリックしてレンダービューにします。背景が真っ暗なので、画面右のピンクの地球儀マーク（ワールドプロパティ）のカラーをグレーくらいに上げておきます。
             </p>
             <a class="wp-block-image" href="original/5.jpg">
-              <img src="resized/5.jpg" alt="">
+              <img src="resized/5.webp" alt="">
             </a>
             <h3> 作品のインポート</h3>
             <p>File > Import > Wavefront (.obj) の順にクリックし、先ほど変換したデータの obj ファイルを開きます。しばらく待ち、ズームアウトすると作品がインポートされています。（マテリアル情報は一歩遅れて適用されます。</p>
             <a class="wp-block-image" href="original/6.jpg">
-              <img src="resized/6.jpg" alt="">
+              <img src="resized/6.webp" alt="">
             </a>
             <p>あれ？ノッペリしてるぞ！？</p>
             <h3>光源の設定 </h3>
@@ -92,7 +92,7 @@
               右上のオブジェクト一覧（アウトライナー）からLightを選択し、3Dビューポート上で G > Z の順にキーを押下し、マウスを上下に移動させると光源が動きます。
             </p>
             <a class="wp-block-image" href="original/7.jpg">
-              <img src="resized/7.jpg" alt="">
+              <img src="resized/7.webp" alt="">
             </a>
             <p>
               続いて光源の設定をします。画面右の緑の電球マークをクリックし、Lightの中の光源の種類をSunに、強さを10程度に、そしてその下のShadowにチェックを入れ、一番下のDistributionを0にします。
@@ -100,7 +100,7 @@
               また、3Dビューポート上の光源から出ている線の先にある黄色い点をドラッグすることで光の向きを変えられます。（Sunの場合、光源そのものの位置を変えても変化はありません。）
             </p>
             <a class="wp-block-image" href="original/8.jpg">
-              <img src="resized/8.jpg" alt="">
+              <img src="resized/8.webp" alt="">
             </a>
             <h3>レンダリングの設定</h3>
             <p>レンダープロパティの設定です。画面右のアイコンが縦に並んでいるところの上の方にあるカメラのようなアイコンをクリックします。
@@ -108,20 +108,20 @@
               （AOとは濃い目の隙間影を追加する処理です）さらに下の方の項目に移動し、ShadowsのCascade Sizeを4096pxに、Soft Shadowsのチェックを外します。床に反射させたい場合はScreen Space Reflectionsにチェックを入れます。
             </p>
             <a class="wp-block-image" href="original/9.jpg">
-              <img src="resized/9.jpg" alt="">
+              <img src="resized/9.webp" alt="">
             </a>
             <h3>床の設定</h3>
             <p>トップ画像のように、床を反射させてみます。Planeを選択し、画面右のピンクのチェッカーフラッグ柄の球体のアイコンをクリックすると、+Newの横にも同じアイコンがあるのでクリックします。
               検索窓を使い、"Material"を探し、クリックします。
             </p>
             <a class="wp-block-image" href="original/10.jpg">
-              <img src="resized/10.jpg" alt="">
+              <img src="resized/10.webp" alt="">
             </a>
             <p>すると設定項目が沢山現れるので、Base Color の白い部分をクリックして背景と同じくらいのグレーに、下の方に行ってRoughness（粗さ）を0にします。
               この時点でかなり反射したと思いますが、最後にMetallicの数値を上げて行き、反射の度合いを調節します。
             </p>
             <a class="wp-block-image" href="original/11.jpg">
-              <img src="resized/11.jpg" alt="">
+              <img src="resized/11.webp" alt="">
             </a>
             <p>こんな感じになったでしょうか。なっていなければ何かを忘れています。一からやり直した方が早いかも。</p>
             <h3>カメラの設定</h3>
@@ -133,13 +133,13 @@
               また、作品が大きいとレンダリング範囲から出てしまうので、Lens項目の中のClip Start / End のEndに0をひとつ追加しておきます。
             </p>
             <a class="wp-block-image" href="original/12.jpg">
-              <img src="resized/12.jpg" alt="">
+              <img src="resized/12.webp" alt="">
             </a>
             <p>カメラの画角を変えるにはFocal Length（焦点距離）を変えるのですが、あまり広角にするとかっこ悪いので無難な50mmがおすすめです。</p>
             <h3>ようやくレンダリング</h3>
             <p>カメラの位置が決まったら、画面上でF12キーを押してレンダリングします。</p>
             <a class="wp-block-image" href="original/13.jpg">
-              <img src="resized/13.jpg" alt="">
+              <img src="resized/13.webp" alt="">
             </a>
             <p>以上です。</p>
             <p>何？船底が反射していないって？そんなに反射させたければCyclesを使いましょう。</p>
