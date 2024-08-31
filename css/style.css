@@ -188,6 +188,8 @@ main {
     height: 200px;
     margin: 0 0 50px;
     width: 100%;
+
+    object-fit: cover;
 }
 .avater {
     background-color: dimgray;
@@ -209,6 +211,9 @@ img {
 svg {
   fill: var(--c);
   vertical-align: inherit;
+}
+iframe {
+  max-width: 100%;
 }
 .wp-block-image {
   margin: 0;
