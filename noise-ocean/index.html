@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <title>【blender】5分で作れて軽量な海の作り方（静止画向け） - nnz-blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#440088">
+  <meta name="keywords" content="minecraft,blender">
+  <meta name="description" content="blenderで海を作るならオーシャンモディファイアを使うのが一般的ですが、ベイク前提の機能ということもありとっつきにくい感があります。そこで、ノイズテクスチャを利用した簡易的な海を、そこそこ綺麗に作れないかと試行錯誤したのでご紹介します。海だけでなく、船を綺麗に撮る方法も少し紹介しています。eevee、cycles両方いけます。">
+  <link href="../css/style.css" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("darkMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-in wrap">
+      <a href="/" class="logo">nnz-blog</a>
+      <small>マインクラフトなどのゲーム動画配信者向けに、blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
+
+    </div>
+
+  </header>
+
+  <div id="content" class="content">
+    <div id="content-in" class="content-in wrap">
+      <main class="main">
+        <article class="article">
+          <header class="article-header">
+            <h1>【blender】5分で作れて軽量な海の作り方（静止画向け）</h1>
+            <time datetime="2023-09-26" class="entry-date">2023.09.26</time>
+            <div class="eye-catch-wrap">
+              <figure class="wp-block-image">
+                <img src="resized/1.webp" alt="">
+              </figure>
+            </div>
+          </header>
+
+          <div class="entry-content">
+            <p>
+              blenderで海を作るならオーシャンモディファイアを使うのが一般的ですが、ベイク前提の機能ということもありとっつきにくい感があります。
+              私が作りたかったのは、果てしなく広がる波の無い大海原。しかも静止画。これはオーシャンモディファイアが想定する利用シーンではないのでは？と思い始めました。
+            </p>
+            <p>そこで、ノイズテクスチャを利用した簡易的な海を、そこそこ綺麗に作れないかと試行錯誤したのでご紹介します。海だけでなく、船を綺麗に撮る方法も少し紹介しています。eevee、cycles両方いけます。</p>
+            <p>タイトルに（静止画向け）と書いてありますが、この方法は波を動かすのが難しいのです。何か良い方法をご存じの方がおられたら教えていただきたいです。</p>
+
+            <div id="toc" class="toc">
+              <span class="toc-title">目次</span>
+
+            </div>
+
+            <h2>概念の説明</h2>
+            <a class="wp-block-image" href="original/2.jpg">
+              <img src="resized/2.webp" alt="">
+            </a>
+            <p>
+              この海は、平らな円盤の上に、ノイズから生成した波を張り付けて作っています。バンプマッピングやノーマル（法線）マッピングといった言葉をマイクラの影MODの設定で見かけたことがあるのではないでしょうか。
+              あれと同じです。波は凹凸しているように見えますが、表面の形状を直接変えるわけではないのですね。
+            </p>
+            <p>また、3DCG特有の概念もひとつ知っておかなくてはいけません。 オブジェクトには、その質感を決めるために一つ以上のマテリアルが必要です（なければ毒々しいピンク色になります）。その中に、波を作り上げていくわけです。</p>
+
+            <h2>本題</h2>
+            <h3>円盤の用意</h3>
+            <p>巨大な円盤を作成し、海面に見立てます。</p>
+            <p>まずblenderを開くと、いつもの立方体があります。これは<span class="u">xキー</span>で消しておきます。</p>
+            <p>
+              <span class="u">shift+a</span>でmeshの追加を選び、更にcircleを選びます。すると、輪っかが出現すると同時に<span class="u">画面左下</span>にメニュー（『最後の操作を調整』メニュー）が出てくるので、これをクリックします。
+              Fill Typeがnothingになっていると思うので、これをTriangle Fanに変更しておきます。これでやっと、海面を作れたということですね。
+              さらに、上のRadiusを大きな数値（1000mくらい）に変更し、あなたの納得できる広さの海を作ってください。
+            </p>
+            <a class="wp-block-image" href="original/3.jpg">
+              <img src="resized/3.webp" alt="">
+            </a>
+            <p>
+              ここで、海の広さを確認しようとズームアウトしていくと、 表示がおかしいことに気づくかもしれません。これは、ビューポートに表示される範囲が制限されているからです。
+              そんな時は、マウスカーソルをビューポート上において、<span class="u">Nキー</span>を押下しましょう。サイドバーが表示されます。
+              サイドバーのViewタブの中の、Clip Start/EndのEndの方に0をひとつ付け足します。するとちゃんと表示されたのではありませんか？ 次はいよいよこの円盤に波を立たせますよ。
+            </p>
+            <a class="wp-block-image" href="original/4.jpg">
+              <img src="resized/4.webp" alt="">
+            </a>
+
+            <h3>波を作る</h3>
+            <p>円盤にマテリアルを追加し、波っぽい見た目にします。</p>
+            <p>
+              <span class="u">ウィンドウの一番上</span>を見ると、現在は"Layout"タブに居るのがわかるでしょうか。これを"Shading"タブに切り替えます。
+              すると画面下にノードエディターが現れるので、ここでノードを組んでいきます。うわっ、出たよ。ノード。
+            </p>
+            <p>
+              改めて、円盤が選択されていることを確認してください。次に、+Newというボタンを押したくなりますが、その気持ちは抑えて左の球体マークの中からMaterialを選びます。
+              そう、最初からサンプルのマテリアルが用意されているのです。
+            </p>
+            <p>Principled BSDF の<span class="u">ベースカラーを黒</span>に、<span class="u">Roughness（粗さ）を0</span>にします。すると鏡のように景色が反射します。</p>
+            <a class="wp-block-image" href="original/5.jpg">
+              <img src="resized/5.webp" alt="">
+            </a>
+            <p>ちなみに、右上の円が四つ並んでいるところ（ビューポートシェーディング）の右の下三角 をクリックすると、背景を選択できます。青空のものにしておくと海っぽくなりますよ。</p>
+            <a class="wp-block-image" href="original/6.jpg">
+              <img src="resized/6.webp" alt="">
+            </a>
+            <p>
+              次は早速、波の元となるノイズテクスチャを生成します。ノードエディター上で<span class="u">shift+a</span>を押し、Noise Texture　というノードを追加してください。
+              今回、海が非常に広いので、ノイズテクスチャの"Scale"の値を500から700程度に設定しておいてください。
+              早速、このノイズテクスチャノードの"color"を、Principled BSDF の下の方にある"normal（法線）"に繋いでみてください。
+            </p>
+            <a class="wp-block-image" href="original/7.jpg">
+              <img src="resized/7.webp" alt="">
+            </a>
+            <p>
+              かなり海っぽくなっていますが、トップの画像と比べてみたください。なんか違いますね。この使い方は間違っています。ノイズテクスチャの後に、bumpノードを追加しなければなりません。
+              （ノイズテクスチャを直接ノーマルマップとして使用するより、ハイトマップとしてそれをノーマルに変換する方が綺麗になるからです。）
+            </p>
+            <p>bumpノードを間に持っていき、ノイズテクスチャノードの"color"から"bump"の"height"に、"bump"の"normal"から"P.BSDF"の"normal"に繋ぎます。これで、海と言って差し支えないものが完成です。</p>
+            <a class="wp-block-image" href="original/8.jpg">
+              <img src="resized/8.webp" alt="">
+            </a>
+            <h3>更に綺麗な波にするには？</h3>
+            <p>
+              より綺麗で現実的な波にするために、細かい設定を弄っていきます。まず、ノイズテクスチャノードの"Detail"を6に上げます。すると海面に寄って行ったときに細かい波増えているのがわかります。
+              次にBumpノードの"Distance"を2くらいに上げます。これは遠巻きに見たときの波のくっきりさが変わりますが、上げ過ぎると不自然なのでお好みで調節してください。
+            </p>
+            <a class="wp-block-image" href="original/9.jpg">
+              <img src="resized/9.webp" alt="">
+            </a>
+
+            <h2>レンダリング準備</h2>
+            <h3>背景の設定</h3>
+            <p>
+              まず、背景の設定です。画面右上の<span class="u">球体が四つ並んでいる中の一番右</span>を選択してレンダーモードにしておきます。
+              これがレンダリング結果になるのですが、背景が無くなり真っ暗になったのではないでしょうか。今回は背景を作るために環境テクスチャを利用しますので、まずは背景となる画像を用意しなければなりません。
+              画像は以下のWebサイトから入手しました。地球儀のタブを開いて、colorの横の点をクリックし、Environmental Texture（環境テクスチャ）を選択します。
+              すると、その下にOpen（フォルダを開く）が出現するので、先ほどダウンロードした画像を選択します。すると、空が現れます。
+            </p>
+            <p>環境テクスチャ入手先です。今回は4k, HDRを使用しました。<a href="https://polyhaven.com/a/table_mountain_1_puresky">polyhaven.com/a/table_mountain_1_puresky</a></p>
+            <a class="wp-block-image" href="original/10.jpg">
+              <img src="resized/10.webp" alt="">
+            </a>
+            <h3>カメラの設定</h3>
+            <p>次にカメラの設定です。画面右上のアウトライナーからカメラを選びます。すると、プロパティにフィルムカメラアイコンのタブが出現しますのでクリックします。Lensの中のClip Start/ EndのEndに0を一つ追加します。</p>
+            <a class="wp-block-image" href="original/11.jpg">
+              <img src="resized/11.webp" alt="">
+            </a>
+            <h3>雰囲気の設定</h3>
+            <p>霧の追加とBloomを有効にします。</p>
+            <p>
+              霧を追加するには、<span class="u">アイコンが縦に並んでいるところのピンクの地球儀（ワールドプロパティ）</span>をクリックして、Volumeを開くとVolumeの欄がnoneになっていると思うので、
+              ここをクリックして"Volume Scatter（ボリュームの散乱）"を選択します。
+              すると空が黒くなると思うので、Density（密度）を0.001くらいにして調節してください。
+            </p>
+            <a class="wp-block-image" href="original/12.jpg">
+              <img src="resized/12.webp" alt="">
+            </a>
+            <p>セットで霧が発生する範囲を設定します。<span class="u">アイコンが縦に並んでいるところのカメラ（オブジェクトデータプロパティ）をクリックして</span>VolumetricsのStartを100mくらいに、Endを1000mくらいに設定します。</p>
+            <p>同じくレンダープロパティの"Bloom"の項目にもチェックを入れて置きます。bloomは光が当たっている部分がぼわっと広がる表現で、逆光下で大きく印象が変わります。</p>
+            <a class="wp-block-image" href="original/13.jpg">
+              <img src="resized/13.webp" alt="">
+            </a>
+            <p>ここまで完了したら、カメラの向きを調節してレンダリングしてみましょう。</p>
+            <p>カメラを動かすには、まずカメラオブジェクトを選択してから、<span class="u">Gキーで動かしRキーで回転</span>させるか、サイドバーのLocation Rotationの数値上をマウスで左右にドラッグします。
+              <span class"u">F12キー</span>を押してレンダリングします。
+            </p>
+            <p>こんな感じになっていたら成功です。</p>
+            <a class="wp-block-image" href="original/14.jpg">
+              <img src="resized/14.webp" alt="">
+            </a>
+
+            <h2>被写体を置く場合の注意</h2>
+            <p>トップの画像ではマインクラフトの作品を被写体として撮影していますが、このように被写体を置く場合は更に綺麗に撮る工夫が必要です。</p>
+            <p>レンダリングエンジンにcyclesを使用するなら特別に弄らなくとも綺麗になると思いますが、eevee の場合はコツが必要です。</p>
+            <a class="wp-block-image" href="original/15.jpg">
+              <img src="resized/15.webp" alt="">
+            </a>
+            <h3>影</h3>
+            <p> マインクラフトの作品をインポートして撮影してみましたが、ノッペリした感じになってしまっていますね。
+              eevee では影を作るために別途光源を設置する必要があります。ライトオブジェクトを選択して、電球アイコンの中の光源の種類を太陽に、強さを5から10程度に、そしてShadowにチェックを入れます。
+            </p>
+            <a class="wp-block-image" href="original/16.jpg">
+              <img src="resized/16.webp" alt="">
+            </a>
+            <p>もう一つ、重要な項目があります。レンダープロパティに戻り、アンビエントオクルージョンとスクリーンスペースリフレクションにチェックを入れます。</p>
+            <p>アンビエントオクルージョンは距離を10mに、Factor（係数）を2に、Bounces Approximation（バウンスを近似）のチェックを外すとかなり濃い目の隙間影が出ます。</p>
+            <a class="wp-block-image" href="original/17.jpg">
+              <img src="resized/17.webp" alt="">
+            </a>
+            <h3>反射</h3>
+            <p>スクリーンスペースリフレクションはその名の通り、海面に船体が反射します。簡易的な計算ですので不正確な部分も多いのですが、あるのとないのとでは大違いです。</p>
+            <p>そしてレンダリングしたのがこちら。だいぶマシになりました。</p>
+            <a class="wp-block-image" href="original/18.jpg">
+              <img src="resized/18.webp" alt="">
+            </a>
+
+            <h2>発展</h2>
+            <p>今回は静止画を撮る方法でしたが、オーシャンモディファイアをベイクすれば動く波も作れます。</p>
+            <a href="../ocean-modifier/">【blender】海洋モディファイア（Ocean Modifier）を用いた海（動画向け）</a>
+            <p>また、こちらでは反射する床の上で作品を撮影する方法を紹介しています。</p>
+            <a href="../minecraft-to-blender-eevee/">【blender】マインクラフトの作品をblenderで撮影する手順【eevee篇】</a>
+          </div>
+        </article>
+      </main>
+      <div id="sidebar" class="sidebar">
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer">
+    <div class="footer-in wrap">
+      <span class="copyright">© 2022 nnz-design.</span>
+
+    </div>
+
+  </footer>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
