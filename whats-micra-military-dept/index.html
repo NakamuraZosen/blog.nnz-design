@@ -10,6 +10,16 @@
   <meta name="keywords" content="マインクラフト,軍事部,minecraft">
   <meta name="description" content="この記事はこれから始める方のためにこの界隈を簡潔に説明するものです。現在の作品の傾向や、活動の始め方、代表的な制作者を紹介しています。">
   <link href="../css/style.css" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("colorMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
 </head>
 
 <body>
