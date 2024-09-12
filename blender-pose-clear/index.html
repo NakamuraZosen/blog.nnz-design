@@ -10,6 +10,16 @@
   <meta name="keywords" content="キャラクター,モデリング,アニメーション,blender">
   <meta name="description" content="アニメーションの製作中、ポーズをもとに戻したい事が多々ありますが、'Clear User Transform' で戻せなくて困ります。戻し方を、ケースごとに考えました。">
   <link href="../css/style.css" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("colorMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
 </head>
 
 <body>
