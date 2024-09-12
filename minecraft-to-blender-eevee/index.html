@@ -10,6 +10,16 @@
   <meta name="keywords" content="撮影,変換,minecraft,blender,mineways">
   <meta name="description" content="マインクラフトの作品をblenderで撮影する手順を開設">
   <link href="../css/style.css" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("colorMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
 </head>
 
 <body>
