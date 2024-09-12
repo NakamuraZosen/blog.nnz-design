@@ -10,6 +10,16 @@
   <meta name="keywords" content="blender,作り方,航跡">
   <meta name="description" content="航跡をシンプルに作れないかと思いながら、主にテクスチャを動かすのにドライバを使用したり、ノイズの形を妥協すると共に色を強くするなど試行錯誤しました。">
   <link href="../css/style.css" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("colorMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
 </head>
 
 <body>
