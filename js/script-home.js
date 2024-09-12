@@ -41,3 +41,39 @@ function populateEntryList(obj) {
   };
 };
 populate();
+//------------------------------------------------------------------------------
+//mode switch
+//------------------------------------------------------------------------------
+const rootClass = document.documentElement.classList;
+const colorMode1 = document.getElementById("colorMode1");
+const colorMode2 = document.getElementById("colorMode2");
+const colorMode3 = document.getElementById("colorMode3");
+const colorMode = localStorage.getItem("colorMode");
+
+function refreshRadioButton() {
+  if (colorMode === "dark") {
+    colorMode3.checked = true;
+  } else if (colorMode == "light") {
+    colorMode2.checked = true;
+  } else {
+    colorMode1.checked = true;
+  };
+};
+refreshRadioButton();
+
+colorMode3.addEventListener("change", () => {
+  rootClass.add("dark");
+  localStorage.setItem("colorMode", "dark");
+});
+colorMode2.addEventListener("change", () => {
+  rootClass.remove("dark");
+  localStorage.setItem("colorMode", "light");
+});
+colorMode1.addEventListener("change", () => {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    rootClass.add("dark");
+  } else {
+    rootClass.remove("dark");
+  };
+  localStorage.setItem("colorMode", "");
+});
