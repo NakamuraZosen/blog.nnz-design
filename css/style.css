@@ -30,7 +30,7 @@ body {
 /*style for all of body*/
 body{
   margin: 0;
-  font-family: "游ゴシック", sans-serif;
+  font-family: "Noto Sans CJK", "游ゴシック", sans-serif;
   color: var(--c);
   background-color: var(--c-bg-neutral);
 }
