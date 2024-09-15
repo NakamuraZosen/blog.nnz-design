@@ -63,7 +63,7 @@
 
             <h2>概念の説明</h2>
             <a class="wp-block-image" href="original/2.jpg">
-              <img src="resized/2.webp" alt="">
+              <img src="resized/2.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <p>
               この海は、平らな円盤の上に、ノイズから生成した波を張り付けて作っています。バンプマッピングやノーマル（法線）マッピングといった言葉をマイクラの影MODの設定で見かけたことがあるのではないでしょうか。
@@ -81,7 +81,7 @@
               さらに、上のRadiusを大きな数値（1000mくらい）に変更し、あなたの納得できる広さの海を作ってください。
             </p>
             <a class="wp-block-image" href="original/3.jpg">
-              <img src="resized/3.webp" alt="">
+              <img src="resized/3.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <p>
               ここで、海の広さを確認しようとズームアウトしていくと、 表示がおかしいことに気づくかもしれません。これは、ビューポートに表示される範囲が制限されているからです。
@@ -89,7 +89,7 @@
               サイドバーのViewタブの中の、Clip Start/EndのEndの方に0をひとつ付け足します。するとちゃんと表示されたのではありませんか？ 次はいよいよこの円盤に波を立たせますよ。
             </p>
             <a class="wp-block-image" href="original/4.jpg">
-              <img src="resized/4.webp" alt="">
+              <img src="resized/4.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
 
             <h3>波を作る</h3>
@@ -104,11 +104,11 @@
             </p>
             <p>Principled BSDF の<span class="u">ベースカラーを黒</span>に、<span class="u">Roughness（粗さ）を0</span>にします。すると鏡のように景色が反射します。</p>
             <a class="wp-block-image" href="original/5.jpg">
-              <img src="resized/5.webp" alt="">
+              <img src="resized/5.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <p>ちなみに、右上の円が四つ並んでいるところ（ビューポートシェーディング）の右の下三角 をクリックすると、背景を選択できます。青空のものにしておくと海っぽくなりますよ。</p>
             <a class="wp-block-image" href="original/6.jpg">
-              <img src="resized/6.webp" alt="">
+              <img src="resized/6.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <p>
               次は早速、波の元となるノイズテクスチャを生成します。ノードエディター上で<span class="u">shift+a</span>を押し、Noise Texture　というノードを追加してください。
@@ -116,7 +116,7 @@
               早速、このノイズテクスチャノードの"color"を、Principled BSDF の下の方にある"normal（法線）"に繋いでみてください。
             </p>
             <a class="wp-block-image" href="original/7.jpg">
-              <img src="resized/7.webp" alt="">
+              <img src="resized/7.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <p>
               かなり海っぽくなっていますが、トップの画像と比べてみたください。なんか違いますね。この使い方は間違っています。ノイズテクスチャの後に、bumpノードを追加しなければなりません。
@@ -124,7 +124,7 @@
             </p>
             <p>bumpノードを間に持っていき、ノイズテクスチャノードの"color"から"bump"の"height"に、"bump"の"normal"から"P.BSDF"の"normal"に繋ぎます。これで、海と言って差し支えないものが完成です。</p>
             <a class="wp-block-image" href="original/8.jpg">
-              <img src="resized/8.webp" alt="">
+              <img src="resized/8.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <h3>更に綺麗な波にするには？</h3>
             <p>
@@ -132,7 +132,7 @@
               次にBumpノードの"Distance"を2くらいに上げます。これは遠巻きに見たときの波のくっきりさが変わりますが、上げ過ぎると不自然なのでお好みで調節してください。
             </p>
             <a class="wp-block-image" href="original/9.jpg">
-              <img src="resized/9.webp" alt="">
+              <img src="resized/9.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
 
             <h2>レンダリング準備</h2>
@@ -145,12 +145,12 @@
             </p>
             <p>環境テクスチャ入手先です。今回は4k, HDRを使用しました。<a href="https://polyhaven.com/a/table_mountain_1_puresky">polyhaven.com/a/table_mountain_1_puresky</a></p>
             <a class="wp-block-image" href="original/10.jpg">
-              <img src="resized/10.webp" alt="">
+              <img src="resized/10.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <h3>カメラの設定</h3>
             <p>次にカメラの設定です。画面右上のアウトライナーからカメラを選びます。すると、プロパティにフィルムカメラアイコンのタブが出現しますのでクリックします。Lensの中のClip Start/ EndのEndに0を一つ追加します。</p>
             <a class="wp-block-image" href="original/11.jpg">
-              <img src="resized/11.webp" alt="">
+              <img src="resized/11.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <h3>雰囲気の設定</h3>
             <p>霧の追加とBloomを有効にします。</p>
@@ -160,12 +160,12 @@
               すると空が黒くなると思うので、Density（密度）を0.001くらいにして調節してください。
             </p>
             <a class="wp-block-image" href="original/12.jpg">
-              <img src="resized/12.webp" alt="">
+              <img src="resized/12.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <p>セットで霧が発生する範囲を設定します。<span class="u">アイコンが縦に並んでいるところのカメラ（オブジェクトデータプロパティ）をクリックして</span>VolumetricsのStartを100mくらいに、Endを1000mくらいに設定します。</p>
             <p>同じくレンダープロパティの"Bloom"の項目にもチェックを入れて置きます。bloomは光が当たっている部分がぼわっと広がる表現で、逆光下で大きく印象が変わります。</p>
             <a class="wp-block-image" href="original/13.jpg">
-              <img src="resized/13.webp" alt="">
+              <img src="resized/13.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <p>ここまで完了したら、カメラの向きを調節してレンダリングしてみましょう。</p>
             <p>カメラを動かすには、まずカメラオブジェクトを選択してから、<span class="u">Gキーで動かしRキーで回転</span>させるか、サイドバーのLocation Rotationの数値上をマウスで左右にドラッグします。
@@ -173,32 +173,32 @@
             </p>
             <p>こんな感じになっていたら成功です。</p>
             <a class="wp-block-image" href="original/14.jpg">
-              <img src="resized/14.webp" alt="">
+              <img src="resized/14.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
 
             <h2>被写体を置く場合の注意</h2>
             <p>トップの画像ではマインクラフトの作品を被写体として撮影していますが、このように被写体を置く場合は更に綺麗に撮る工夫が必要です。</p>
             <p>レンダリングエンジンにcyclesを使用するなら特別に弄らなくとも綺麗になると思いますが、eevee の場合はコツが必要です。</p>
             <a class="wp-block-image" href="original/15.png">
-              <img src="resized/15.webp" alt="">
+              <img src="resized/15.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <h3>影</h3>
             <p> マインクラフトの作品をインポートして撮影してみましたが、ノッペリした感じになってしまっていますね。
               eevee では影を作るために別途光源を設置する必要があります。ライトオブジェクトを選択して、電球アイコンの中の光源の種類を太陽に、強さを5から10程度に、そしてShadowにチェックを入れます。
             </p>
             <a class="wp-block-image" href="original/16.jpg">
-              <img src="resized/16.webp" alt="">
+              <img src="resized/16.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <p>もう一つ、重要な項目があります。レンダープロパティに戻り、アンビエントオクルージョンとスクリーンスペースリフレクションにチェックを入れます。</p>
             <p>アンビエントオクルージョンは距離を10mに、Factor（係数）を2に、Bounces Approximation（バウンスを近似）のチェックを外すとかなり濃い目の隙間影が出ます。</p>
             <a class="wp-block-image" href="original/17.jpg">
-              <img src="resized/17.webp" alt="">
+              <img src="resized/17.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
             <h3>反射</h3>
             <p>スクリーンスペースリフレクションはその名の通り、海面に船体が反射します。簡易的な計算ですので不正確な部分も多いのですが、あるのとないのとでは大違いです。</p>
             <p>そしてレンダリングしたのがこちら。だいぶマシになりました。</p>
             <a class="wp-block-image" href="original/18.png">
-              <img src="resized/18.webp" alt="">
+              <img src="resized/18.webp" alt="クリックで元のサイズの画像を表示します">
             </a>
 
             <h2>発展</h2>
