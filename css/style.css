@@ -346,8 +346,7 @@ iframe {
     font-size: 10vw;
   }
   .header-in small {
-    text-align: center;
-    font-size: 2.5vw;
+    display: none;
   }
   .copyright {
     text-align: center;
