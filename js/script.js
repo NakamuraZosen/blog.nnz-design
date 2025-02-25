@@ -61,7 +61,7 @@ sidebar.insertAdjacentHTML('afterbegin', `
             </label>
           </div>
         </fieldset>
-        <span class="privacy-policy">プライバシーポリシー・免責事項</span>
+        <a href="../privacy-policy/" class="privacy-policy">プライバシーポリシー・免責事項</a>
       </div>
     </div>
   </div>
