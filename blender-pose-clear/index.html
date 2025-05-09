@@ -25,7 +25,9 @@
 <body>
   <header class="header" id="header">
     <div class="header-in wrap">
-      <a href="/" class="logo">nnz-blog</a>
+      <a href="/" class="svg-logo">
+        <img src="../img/NNZ-blog.svg" alt="トップページへ">
+      </a>
       <small>マインクラフトなどのゲーム動画配信者向けに、blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
 
     </div>
@@ -60,16 +62,24 @@
             </a>
             <p>アウトライナーのアーマーチュアオブジェクトの三角をクリックして展開すると、その下に「Animation」という項目が増えています。
               これを右クリックしてClear Animation Dataをクリックすると、ポーズモード上で「クリアユーザートランスフォーム」が使えるようになります。</p>
-            <p>追記：Animationを削除するならそれを後で元に戻す方法も知っておかなければなりません。</p>
+            <p>追記：Animationを削除するときはフェイクユーザー（盾のマーク）をオンにしておいてください。</p>
             <h2>アニメーション作成中にポーズを戻したいとき</h2>
-            <p>上記のようにした後、アクションエディターに入ると再びポーズをとってしまいます。何が起っているのかというと、ボーンプロパティのトランスフォームに数値が入っています。
-              下の画像の黄色い部分の数字です。これはAlt+GやAlt+Rで戻せます。しかし、毎回これをするのは面倒ですよね。</p>
+            <p>
+              Aで全てのボーンを選択し、Alt+Gで移動を、Alt+Rで回転を元に戻せます。
+            </p>
+            <p>
+              Clear Animation Dataによってポーズを解除してもそれは一時的なものとなり、アクションエディターに入ると再びDataがリンクされポーズをとってしまいます。
+              この状態ではボーンプロパティのトランスフォームに数値が入っています。これをAlt+GやAlt+Rで戻せるというわけです。
+              しかし、毎回これをするのは面倒ですよね。
+            </p>
             <a class="wp-block-image" href="original/3.jpg">
               <img src="resized/3.webp" alt="">
             </a>
             <p>ですので初期ポーズのアクションを一つ作っておくのがお薦めです。
               <br>
-              ポーズをもとに戻した後、ボーンをAで全選択してiキーでキーフレームを打ちます。こうしておくと、次にキーフレームの無いアクションに移動したとき初期ポーズがキープされます。</p>
+              ポーズをもとに戻した後、ボーンをAで全選択してiキーでキーフレームを打ちます。こうしておくと、次にキーフレームの無いアクションに移動したとき初期ポーズがキープされます。
+              なお、ここで作成した初期ポーズのアクションにはフェイクユーザー（盾のマーク）をオンにしておいてください。Blenderはリンクの切れたDataをセーブしないからです。
+            </p>
             <a class="wp-block-image" href="original/4.jpg">
               <img src="resized/4.webp" alt="">
             </a>
@@ -90,7 +100,7 @@
 
   <footer id="footer" class="footer">
     <div class="footer-in wrap">
-      <span class="copyright">© 2022 nnz-design.</span>
+      <span class="copyright">© 2022-2025 nnz-design.</span>
 
     </div>
 
