@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <title>【Blender】船のリグ #1 - nnz-blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#440088">
+  <meta name="keywords" content="minecraft,blender">
+  <meta name="description" content="私がマインクラフトで製作したウースター級軽巡を例に、船（主に軍艦）のリグを組む手順をstep-by-stepで解説します。">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("colorMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-in wrap">
+      <a href="/" class="svg-logo">
+        <img src="../img/NNZ-blog.svg" alt="トップページへ">
+      </a>
+      <small>マインクラフトなどのゲーム動画配信者向けに、blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
+
+    </div>
+
+  </header>
+
+  <div id="content" class="content">
+    <div id="content-in" class="content-in wrap">
+      <main class="main">
+        <article class="article">
+          <header class="article-header">
+            <h1>【Blender】船のリグ #1</h1>
+            <time datetime="2024-09-19" class="entry-date">2024.09.19</time>
+            <div class="eye-catch-wrap">
+              <figure class="wp-block-image">
+                <img src="resized/1.webp" alt="">
+              </figure>
+            </div>
+          </header>
+
+          <div class="entry-content">
+            <p>
+              私がマインクラフトで製作したウースター級軽巡を例に、船（主に軍艦）のリグを組む手順をstep-by-stepで解説します。
+            </p>
+            <p>今回からシリーズで、砲塔、砲身、及び射撃指揮装置の可動化、IKによる砲塔と砲身の制御、更にレーダーの動きと船の揺れを再現します。</p>
+            <p>今回、第一回は砲塔、砲身、及び射撃指揮装置の可動化、（将来的にIKによる砲塔と砲身の制御も）を解説します。</p>
+            <p>なお、Blenderの操作に習熟されている方は、各見出しの最初のリストを見るだけで手順を把握して頂けます。</p>
+            <p>船はY軸に向いている前提で解説しますので、X軸の場合は適宜読み替えてください。</p>
+
+            <div id="toc" class="toc">
+              <span class="toc-title">目次</span>
+
+            </div>
+
+            <h2>概念の説明</h2>
+            <p>
+              船のメッシュオブジェクトに対して、Armatureを用いて可動化します。
+            </p>
+            <p>まず、船のオブジェクトを船体、砲塔、砲身に三分割し、それぞれを一つのArmatureに紐づけます。最後にArmatureにIKをセットアップし、ターゲットボーンを動かすことで砲身を指向できるようにします。</p>
+            <p>
+              船の揺れや移動はArmatureオブジェクトのトランスフォームを用いる方法と、RootボーンのDeformを利用する方法が考えられますが、今回は船内のライトオブジェクトやカメラオブジェクトを一緒に動かすため前者を利用します。
+            </p>
+
+            <h2>船のモデルの準備</h2>
+            <p>
+              マインクラフトの作品をobj形式でBlenderにインポートする方法は以前の記事で解説しています。
+              <a href="../minecraft-to-blender-eevee/">【blender】マインクラフトの作品をblenderで撮影する手順【eevee篇】</a>
+            </p>
+            <p>
+              Minecraft内で予め可動パーツを分割しておくとBlender上で作業しやすいでしょう。分割作業にはMCEdit等のソフトを利用できます。
+            </p>
+
+            <h2>船（メッシュオブジェクト）とArmatureの用意</h2>
+            <p>船のモデルインポートし、そのMesh ObjectとArmatureを準備します。</p>
+            <ul>
+              <li>メッシュオブジェクトをインポート</li>
+              <li>Armatureオブジェクトと最初のボーンを追加</li>
+              <li>両オブジェクトを原点に移動</li>
+              <li>両オブジェクトとMeshデータ、並びにArmatureデータに船の名前を命名</li>
+            </ul>
+            <h3>操作：船のモデルをインポートする</h3>
+            <p>船（メッシュオブジェクト）をインポートします。すでにあるリグ利用するなら、メッシュオブジェクトだけを<span class="k">Xキー</span>で消しておきます。</p>
+            <a class="wp-block-image" href="original/2.png">
+              <small>クリックで元のサイズの画像を表示します</small>
+              <img src="resized/2.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <p>まずblenderを開き、キューブを削除して、<span class="c">File > Import > Wavefront (.obj)</span>と進んで、objファイルを選択します。</p>
+            <a class="wp-block-image" href="original/5.jpg">
+              <img src="resized/5.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <a class="wp-block-image" href="original/6.jpg">
+              <img src="resized/6.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <p>インポートした船が原点にない場合は、<span class="k">alt + G</span>で原点に移動させます。</p>
+            <p>
+              オブジェクト名とメッシュ名を船の名前にします。
+              オブジェクト名はアウトライナー上でダブルクリック、メッシュ名は<span class="c">Object Data Properties</span>の一番上の欄で変更できます。
+              今回はWorcesterとしました。
+            </p>
+            <a class="wp-block-image" href="original/7.png">
+              <img src="resized/7.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <h3>操作：Armatureオブジェクトを追加</h3>
+            <p>次に<span class="k">shift+A</span>でArmatureオブジェクトを追加します。すると最初のボーンが出現します。</p>
+            <p>小さすぎる場合は、ボーンのTail側を選択して<span class="k">G</span><span class="k">Z</span>で真上に移動させます。だいたい船のマストくらいの高さにするとよいでしょう。また、Headを原点においてください。</p>
+            <p>すでにArmatureを用意している場合は親子関係をクリアして原点に移動させます。画像は親子関係をクリアしているところです。</p>
+            <a class="wp-block-image" href="original/3.jpg">
+              <img src="resized/3.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <p>Armatureもオブジェクトとデータのそれぞれに命名します。今回はArmature.worcesterとしました。</p>
+            <p>また、見やすくするために<span class="c">Vewport Display > Display As: Stick</span>に、<span class="c">Show: In Front</span>にチェックを入れて置きました。</p>
+
+            <h2>船（メッシュオブジェクト）のパーツ分け</h2>
+            <p>後の頂点ウェイトの適用を操作しやすくするため、船のメッシュオブジェクトを可動範囲に基づいて三分割します。</p>
+            <ul>
+              <li>全ての砲塔と、射撃指揮装置やレーダー等の可動パーツ（以下、砲塔類）を船体のオブジェクトから分離</li>
+              <li>砲身を砲塔から分離</li>
+              <li>砲塔類は砲塔類で、砲身は砲身でオブジェクトをまとめる</li>
+              <li>砲塔と砲身が浮いている場合は、正しい位置に移動させる（原点は船体と同じ0, 0, 0に）</li>
+              <li>原点がずれているので、原点が船体中央に来るように調節する。</li>
+            </ul>
+
+            <h3>操作：砲塔と砲身を分離</h3>
+            <p>可動パーツである、砲塔と射撃指揮装置等を船体から分離します。</p>
+            <p>船のオブジェクトを選択して<span class="k">Tabキー</span>で編集モードに入ります。</p>
+            <p>範囲選択を駆使し、砲塔を選んだあと<span class="k">右クリック</span><span class="c">Separate（分離）> Selection</span>をクリック</p>
+            <p>
+              選択するときは、テンキーの3又は画面右上のXYZのXをクリックして横からの視点にし、Viewport DisplayをWireframeに、Toggle X-RayをONに、そして<span class="k">3キー</span>で面選択モードにするとやりやすいと思います。
+            </p>
+            <p>
+              また、無理に一度に分離する必要は無く、いくつかに分離してから結合することもできます。
+              オブジェクトモードで、結合したいオブジェクトを全て<span class="k">Shift + クリック</span>で選択し、
+              最後に結合先となるオブジェクトを<span class="k">Shift + クリック</span>で選択して<span class="k">Ctrl + J</span>で結合できます。
+            </p>
+            <p>
+              測距儀等の可動パーツも砲塔と同様に分離し、一個のオブジェクトに結合します。今回はこのオブジェクトにWorcester.Turretと命名しました。
+            </p>
+            <a class="wp-block-image" href="original/9.jpg">
+              <img src="resized/9.webp" alt="">
+            </a>
+            <p>更に、分離した砲塔から、砲身を分離します。</p>
+            <p>砲塔のオブジェクトを選択して編集モードに入り、砲身を先ほどと同様の操作で分離します。</p>
+            <p>今度は、Toggle X-RayをOFFに、面選択モードにすると選択しやすいですよ。</p>
+            <p>オブジェクトはまた砲身同士をまとめ、今回はWorcester.barrelと命名しました。</p>
+            <a class="wp-block-image" href="original/10.png">
+              <img src="resized/10.webp" alt="">
+            </a>
+            <a class="wp-block-image" href="original/11.png">
+              <img src="resized/11.webp" alt="">
+            </a>
+            <h3>操作：砲塔をもとの位置に戻す</h3>
+            <p>砲塔を浮かせている場合は、それらをもとの位置に戻します。</p>
+            <p>砲塔オブジェクトを選択して編集モードに入り、砲塔を範囲選択してから<span class="k">G</span><span class="k">Z</span>でだいたいの位置を調節します</p>
+            <a class="wp-block-image" href="original/12.jpg">
+              <img src="resized/12.webp" alt="">
+            </a>
+            <p>すると画面左下にMove（移動）と書かれたメニューが出現するので、そのZの数字に整数を入力し、微調節してください。</p>
+            <a class="wp-block-image" href="original/13.jpg">
+              <img src="resized/13.webp" alt="">
+            </a>
+            <a class="wp-block-image" href="original/14.png">
+              <img src="resized/14.webp" alt="">
+            </a>
+            <h3>操作：原点が船体中央に来るように調節</h3>
+            <p>おそらく、三分割した船のモデル全ての原点がすこしだけ左右にずれているはずです。</p>
+            <a class="wp-block-image" href="original/15.png">
+              <img src="resized/15.webp" alt="">
+            </a>
+            <p>これを修正します。</p>
+            <p>
+              三つのオブジェクトを全て選択して編集モードに入り、<span class="k">Aキー</span>で全選択して<span class="k">G</span><span class="k">X</span>と入力して移動、
+              画面左下にMove（移動）と書かれたメニューが出現するので、そXの数字に0.5又は-0.5を入力し、微調節してください。
+            </p>
+            <a class="wp-block-image" href="original/16.png">
+              <img src="resized/16.webp" alt="">
+            </a>
+
+            <h2>ボーンを組み上げる</h2>
+            <p>可動パーツの数に応じてボーンを組み上げます。</p>
+            <ul>
+              <li>最初のボーンにrootと命名</li>
+              <li>rootからオフセットを維持した子ボーンをいずれかの砲塔のだいたいの位置に追加</li>
+              <li>砲身のだいたいの位置に孫ボーンを追加</li>
+              <li>砲塔ボーンと砲身ボーンに命名</li>
+              <li>砲塔ボーンと砲身ボーンを砲塔の数だけ複製</li>
+              <li>レーダー、射撃指揮装置、IKターゲットのボーンもだいたいの位置に追加しrootの子ボーンに</li>
+              <li>横からの視点にし、スナップを使ってボーンの位置を微調節</li>
+              <li>全てのボーンのxの位置を0にする</li>
+              <li>砲塔と砲身のRollを調節してX軸の周りに回転するように</li>
+            </ul>
+            <h3>操作：だいたいの位置にボーンを追加する</h3>
+            <p>アーマチュアオブジェクトを選択すると、最初のボーンが真上に向かって追加されています。このボーンにRootと命名します。</p>
+            <p>編集モードに入り、ボーンを選択し、Bone Propertiesの一番上にある欄にRootと入力します</p>
+            <a class="wp-block-image" href="original/18.png">
+              <img src="resized/18.webp" alt="">
+            </a>
+            <p>ボーンが小さすぎますので、ボーンの上の丸（Tail）を選択し、<span class="k">G</span>><span class="k">Z</span>で上に伸ばします。スケールを変更しないでください。</p>
+            <p>再びTailを選択し、<span class="k">G</span>><span class="k">Y</span>で前方に伸ばします。</p>
+            <a class="wp-block-image" href="original/17.png">
+              <img src="resized/17.webp" alt="">
+            </a>
+            <p>このボーンを移動させるとRootがついてきてしまうので、一度<span class="k">Y</span>キーで親子関係を解消します。そのあと砲塔のだいたいの位置に移動させます。</p>
+            <p>親子関係を回復します。子ボーン>Rootの順に選択し、<span class="k">Ctrl+P</span>><span class="c">Keep Offset</span>です。RootのTailから子ボーンのHeadに向かって点線が伸びるはずです。</p>
+            <p>
+              砲身のボーンを追加します。砲塔のボーンを選択し、<span class="k">Shift+D</span>で複製してだいたいの位置に移動させます。
+              このままでは砲身がRootの子ボーンになってしまいますので、砲身のボーン>砲塔のボーンの順に選択して、<span class="k">Ctrl+P</span><span class="c">Keep Offset</span>です。
+              砲塔のTailから砲身のHeadに向かって点線が伸びるはずです。
+            </p>
+            <p>砲塔をturretと、砲身をbarrelと命名します。</p>
+            <p>こうして作った砲塔と砲身のセットを、<span class="k">Shift+D</span>で砲塔の数だけ複製します。</p>
+            <p>以上の事を船体の前後で行い、最後にレーダー、射撃指揮装置などの可動部品にもボーンを作成します。毎回Ctrl+P、Keep Offsetと入力するのは面倒ですので砲塔の物をコピーして砲身を削除して流用すると良いでしょう。</p>
+            <p>また、船体の前後に一個ずつIKターゲット用のボーンも追加しておきます。</p>
+            <h3>操作：ボーン位置の微調節</h3>
+            <p>だいたいの位置に配置したボーンを正しい位置に移動させます。</p>
+            <p>テンキーの<span class="k">3</span>、又は<span class="c">3Dビューポート右上のXYZ（プリセットビューポイント）のX</span>をクリックして真横からの視点に変えておきます。</p>
+            <p>続いてスナップを有効にします。<span class="c">画面上の磁石のマーク</span>をクリックし、その横のメニューを開いて<span class="c">Snap to > Edge Center</span>にします</p>
+            <p>準備が整いましたので、移動させます。</p>
+            <p>まず高さを調節します。ボーンを選択し、<span class="k">G</span>><span class="k">Z</span>と入力してカーソルを動かし、砲塔は砲塔の根元に、砲身は砲身の中央に、それぞれ高さを合わせます。</p>
+            <p>水平位置を調節します。<span class="k">G</span>><span class="k">Y</span>と入力して、砲塔、及び砲身それぞれの回転軸に位置を合わせます。レーダー、射撃指揮装置などの可動部品も同じようにします。</p>
+            <p>
+              ボーンを選択するとき、真ん中あたりをクリックするとボーン全体が、両端をクリックすると両端だけが選択されますので状況に応じて使い分けてください。
+              <br>
+              また、ボーンの長さは変形に関係しませんが、だいたいすべてのボーンが同じくらいの長さになるようにしないとポーズモードで動かしたときに震えたようになる現象が発生します。
+            </p>
+            <p>最後に、スナップしたときに左右の位置が若干ずれますので、全てのボーンを首尾線上に並列させます。</p>
+            <p>
+              全てのボーンを選択し、<span class="c">サイドバーのHead: X、Tail: X、の数値</span>に0を入力し、
+              それぞれを<span class="k">右クリック</span>して、<span class="c">Copy Single to Selected</span>を行います。
+              これで全てのボーンのX軸が0になったはずです。
+            </p>
+            <h3>操作：ボーンのRollの調節</h3>
+            <p>ボーンを、常にX軸周りに回転させるように向きを調節します。砲塔ならX軸が鉛直に、砲身ならX軸が横向きに、という具合にです。これをすることでこの後のIKの設定がやりやすくなります。</p>
+            <p>砲塔類のボーンを選択し、サイドバーのRollに角度を入力します。続いて砲身のボーンを選択し、サイドバーのRollに角度を入力します。</p>
+            <p>船がYの負の方向を向いている時はそれぞれ90度、180度、270度等の数値にすると良いはずですが、場合によって異なるようです。</p>
+            <h2>ウェイトの割り当て</h2>
+            <p>モデルにボーンへのウェイトを設定します。</p>
+            <ul>
+              <li>船体のオブジェクト3つをArmatureオブジェクトに対してParent (Armature Deform with Empty Groupes) で親子付ける</li>
+              <li>各パーツに然るべきボーンに対するウェイトを1設定する</li>
+            </ul>
+            <h3>操作：親子付ける</h3>
+            <p>
+              アウトライナー上で、船体、砲塔類、砲身の三つのオブジェクトを<span class="k">Ctrl</span>を押しながら<span class="k">クリック</span>して、
+              最後にアーマチュアオブジェクトを選択、アーマチュアオブジェクトが明るいオレンジ色になっていることを確認して<span class="k">Ctrl+P</span>><span class="c">Armature Deform With Empty Groupes</span>
+              とクリックします。
+            </p>
+            <h3>操作：ウェイトを設定する</h3>
+            <p>
+              ウェイトとは、モデルの全ての頂点に対して、各ボーンへの追従の量を設定する工程です。
+              <br>
+              全ての頂点と申し上げましたが、実際にはボーンの数と同じ数の頂点グループがすでに用意されていますので、そこに頂点を振り分けてからウェイトの数値もグループに対して設定します。
+            </p>
+            <p>
+              まず、船体をRootボーンに割り当てます。
+              <br>
+              船体のオブジェクトを選択し、編集モードに入って<span class="k">A</span>で全選択します。
+              <br>
+              次に<span class="c">画面右下（Propaties）の緑の三角タブ（Object Data Properties）</span>をクリックし、<span class="c">Vertex Groupes</span>の欄のアコーディオンを開いておきます。
+              頂点グループ一覧の一番上にRootがあると思うので、それを選択してWeightの数字が1.000になっていることを確認して<span class="c">Assign</span>をクリックします。
+            </p>
+            <p>
+              次は砲塔に設定します。
+              オブジェクトモードに戻って砲塔のオブジェクトを選択し、編集モードに入ります。
+              今度は各砲塔ごとに別々の頂点グループに割り振らなければなりません。
+              ですからまず、1番砲塔を範囲選択し（砲身は選択しません）、"Turret" の頂点グループにAssignします。
+            </p>
+            <p>
+              同じ作業を砲塔の数だけ行います。2番砲塔以降は"Turret.001"等と命名されているはずです。
+            </p>
+            <p>
+              最後に砲身です。こちらも同様にします。
+            </p>
+
+            <h2>最後に</h2>
+            <p>今回の内容だけで、最低限動かせるようになりました。Armatureオブジェクトを選択し、ポーズモードに入って動かしてみてください。</p>
+            <p>次回はIKを設定して砲身と砲塔を一括で動かせるように設定する他、船そのものの移動と、揺れを実装していきます。</p>
+
+            <a class="wp-block-image" href="original/7.png">
+              <img src="resized/7.webp" alt="">
+            </a>
+          </div>
+        </article>
+      </main>
+      <div id="sidebar" class="sidebar">
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer">
+    <div class="footer-in wrap">
+      <span class="copyright">© 2022-2025 nnz-design.</span>
+
+    </div>
+
+  </footer>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
