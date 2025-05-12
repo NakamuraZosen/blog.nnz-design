@@ -334,14 +334,21 @@ iframe {
   padding: var(--gap30);
 }
 .author-name {
-  font-weight: bold;
+  /*font-weight: bold;
+  font-size: large;*/
+  margin-top: 0;
 }
-.author-content p {
-  margin: 0;
+.author-content ul {
+  font-size: small;
 }
 .link-icon {
   padding: .4rem;
   text-decoration: none;
+  transition: .2s;
+}
+.link-icon:hover {
+  opacity: 0.75;
+  transition: .2s;
 }
 .author-description {
   margin-top: 30px;
@@ -360,10 +367,11 @@ iframe {
 }
 .colorMode label {
   font-size: small;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 .colorMode input:checked + label {
   opacity: 1;
+  border-bottom: 1px solid gray;
 }
 .colorMode div {
 }
