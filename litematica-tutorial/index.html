@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <title>Litematicaの使い方 - nnz-blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#440088">
+  <meta name="keywords" content="マインクラフト,Mod,Litematica,使い方,MCEdit,画像">
+  <meta name="description" content='Minecraftのワールド上でコピーや移動ができるMod "Litematica" の使い方を画像付きで解説します。'>
+  <link href="../css/style.css" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("colorMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-in wrap">
+      <a href="/" class="svg-logo">
+        <img src="../img/NNZ-blog.svg" alt="トップページへ">
+      </a>
+      <small>マインクラフトなどのゲーム動画配信者向けに、blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
+
+    </div>
+
+  </header>
+
+  <div id="content" class="content">
+    <div id="content-in" class="content-in wrap">
+      <main class="main">
+        <article class="article">
+          <header class="article-header">
+            <h1>Litematicaの使い方</h1>
+            <small>この記事は <a href="https://zosen.nnz-design.com/News/index.html">zosen.nnz-design.com/News/</a> から移動されました。</small>
+            <time datetime="2022-03-15" class="entry-date">2022.03.15</time>
+            <div class="eye-catch-wrap">
+              <figure class="wp-block-image">
+                <img src="resized/litematica_7.webp" alt="">
+              </figure>
+            </div>
+          </header>
+
+          <div class="entry-content">
+            <p>
+              Litematicaはコピペ、反転、移動等の操作をゲーム内で行えるMODである。バージョン1.7.10で活動していた時はコピペや反転等にMCEdit、ゲーム内での移動にHACを駆使していた。バージョン1.16に移行するにあたり、それぞれの代替を探していたところ、どうやらこのLitematicaで事足りそうだと思い導入した。
+            </p>
+            <p>
+              この記事では、MCEditユーザーが多用していたであろう、コピペ、反転の操作を解説する
+            </p>
+            <small>2022/09/08　画像を追加しました。読みやすいように画像を小さくしているので、拡大するなら画像を新しいタブで開いてください</small>
+
+            <div id="toc" class="toc">
+              <span class="toc-title">目次</span>
+
+            </div>
+
+            <h2>初期設定</h2>
+            <p>まずやっておかないと、まともに使えないレベルの設定。このMODの初見殺しポイント。</p>
+            <h3>executeOperationキーの設定</h3>
+            <p>ペーストや削除、Fill等の操作を「実行」するキーを設定しなければならない。これを設定しないと何もできない。</p>
+            <ol>
+              <li>
+                <span class="k">M</span>キーでメニューを開き、右上の<span class="c">Configuration Menu</span>をクリック
+                <br>
+                <figure class="wp-block-image">
+                  <img src="resized/litematica_1.webp" alt="">
+                </figure>
+                <figure class="wp-block-image">
+                  <img src="resized/litematica_2.webp" alt="">
+                </figure>
+              </li>
+              <li>
+                <span class="c">Hotkeysの中の、executeOperation</span>がNONEになっているので、そこをクリックしてから割り当てたいキーを押下。今回はEnterキーにしてみた。
+              </li>
+              <li>
+                Escキーで戻れる。
+              </li>
+            </ol>
+            <h3>Area Selection Mode: simple</h3>
+            <p>
+              右クリックと左クリックでそれぞれ範囲の両端のブロックをクリックすることで範囲選択できるようにする。初期設定では座標指定でしか選択できない。
+            </p>
+            <ol>
+              <li>
+                <span class="k">M</span>キーでメニューを開き、左下の<span class="c">Area Selection Mode: normal</span>をクリックしてsmpleにする。
+              </li>
+            </ol>
+            <figure class="wp-block-image">
+              <img src="resized/litematica_3.webp" alt="">
+            </figure>
+
+            <h2>基本的なコピペ（保存可、ワールド跨ぎ可）</h2>
+            <p>選択範囲に名前を付けて保存する方法。これならワールドを跨げるし、ゲーム再起動後でもペーストできる。しかし、操作が煩雑。なお、schematicという用語が登場するが、これはMCEditやAmuletで扱う物とは違う。
+            </p>
+            <h3>コピーの基本的な操作</h3>
+            <ol>
+              <li>
+                木の棒を持つ
+              </li>
+              <li>
+                <span class="k">ctrl+マウスホイール</span>でarea selection にして、左右クリックで範囲選択する。
+                <br>
+                <figure class="wp-block-image">
+                  <img src="resized/litematica_4.webp" alt="">
+                </figure>
+              </li>
+              <li>
+                <span class="k">M</span>キーでメニューを開き、<span class="c">Area Editor</span> から<span class="c">Save Schematic</span>
+                <br>
+                <figure class="wp-block-image">
+                  <img src="resized/litematica_5.webp" alt="">
+                </figure>
+              </li>
+              <li>
+                名前を付けて保存する
+              </li>
+            </ol>
+            <h3>ペーストの基本的な操作</h3>
+            <ol>
+              <li>
+                <span class="k">ctrl+マウスホイール</span>でPaste schematic in worldモードにする
+              </li>
+              <li>
+                <span class="k">M</span>キーでメニューを開き、<span class="c">Load Schematics</span>
+              </li>
+              <li>
+                先ほど保存したデータがあるので、選択して、左下の<span class="c">Load Schematic</span>をクリック
+                <br>
+                <figure class="wp-block-image">
+                  <img src="resized/litematica_6.webp" alt="">
+                </figure>
+              </li>
+              <li>
+                するとUIの裏でプレビュー（schematic placementと呼ぶ）が表示されているので、<span class="k">Esc</span>でUIを閉じる
+              </li>
+              <li>
+                地面をクリックしたり、alt+マウスホイールで前後移動する
+                <br>
+                <figure class="wp-block-image">
+                  <img src="resized/litematica_7.webp" alt="">
+                </figure>
+              </li>
+              <li>
+                <span class="k">Enter</span>キーでペースト実行
+                <br>
+                <figure class="wp-block-image">
+                  <img src="resized/litematica_8.webp" alt="">
+                </figure>
+              </li>
+              <li>
+                すると、青い枠線が残るので、最後に、<span class="k">M</span>キーでメニューを開き、<span class="k">Loaded Schematics</span>から<span class="k">Unload</span>でプレビューを消す。
+              </li>
+            </ol>
+            <h3>ペーストするときに回転、反転する</h3>
+            <ol>
+              <li>
+                上記3番でloadした後、Mキーでメニューを開き、<s>Loaded Schematicsからloadしたいものを選択して、画面下の</s>メニュー画面左上のSchematic Placementsをクリック
+              </li>
+              <li>
+                Configureをクリック
+              </li>
+              <li>
+                画面右下あたりにRotationとMirrorがある。ちゃんとリピーターの向き等も反転する。
+              </li>
+            </ol>
+            <figure class="wp-block-image">
+              <img src="resized/litematica_9.webp" alt="">
+            </figure>
+            <h3>やっておきたい設定</h3>
+            <p>デフォルト設定のままペーストすると、ペースト先にブロックがあった場合に置き換えられない。つまり、船を海ワールドに移動すると水面下が消滅する。そこで空気以外は元のブロックを置き換えられるように設定るする。</p>
+            <ol>
+              <li>
+                Mキーでメニューを開き、右上のConfiguration Menuをクリック
+              </li>
+              <li>
+                Genericの下の方にある、pasteReplaceBehaviorをWith non-airにする。
+              </li>
+            </ol>
+            <figure class="wp-block-image">
+              <img src="resized/litematica_10.webp" alt="">
+            </figure>
+
+            <h2>簡単な1クリックコピペ</h2>
+            <p>Litematicaの真骨頂であるが、メニュー上に無いのでショートカットキーでしか操作できず、しかもデフォルトでショートカットキーが設定されていない。こんな便利機能をなぜ全力で隠すのか。</p>
+            <h3>まずキー割り当て</h3>
+            <ol>
+              <li>
+                Mキーでメニューを開き、右上のConfiguration menuから設定画面へ
+              </li>
+              <li>
+                Hotkeysの中の、cloneSelectionの欄がNONEになっているので、クリックしてから割り当てたいキーを押下。今回はctrl+Cにしてみた。
+              </li>
+              <li>
+                ついでに、一番下にあるunloadCurrentSchematicにもキーを割り当てておく。今回はdeleteにした。これでプレビューを消せる。
+              </li>
+            </ol>
+            <h3>使ってみる</h3>
+            <ol>
+              <li>
+                ctrl+マウスホイールでArea selection にして、左右クリックで範囲選択する。
+              </li>
+              <li>
+                さっき割り当てたキー（今回はctrl+C）を押す
+              </li>
+              <li>
+                すぐにプレビューが表示されるので、位置調節してEnterキーでペースト実行
+              </li>
+              <li>
+                deleteでプレビュー削除
+              </li>
+            </ol>
+            <p>これならメニューを開かなくてもコピペできる</p>
+
+            <h2>その他の操作</h2>
+            <p>基本的な操作は変わらず、モード選択＞範囲選択＞実行（今回はEnterキー）となる。</p>
+            <h3>Delete</h3>
+            <p>上記の通り</p>
+            <h3>Fill</h3>
+            <p>埋めたいブロックを目の前に用意してそれに視点を合わせ、Alt+マウスホイール押し込みで選択。Airを選択したいときは空を見る。</p>
+            <h3>Replace block</h3>
+            <p>無くなってほしいブロックに視点を合わせてShift+マウスホイール押し込みで選択。次に埋めたいブロックに視点を合わせてalt+マウスホイール押し込みで選択。</p>
+            <h3>Move</h3>
+            <p>ConfigでselectionGrabModifireにキーを設定しておく。（今回はEnter）</p>
+            <p>範囲選択し、Enterを押しながらマウスホイールを転がして移動する。</p>
+            <p>※動作不安定</p>
+
+          </div>
+        </article>
+      </main>
+      <div id="sidebar" class="sidebar">
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer">
+    <div class="footer-in wrap">
+      <span class="copyright">© 2022-2025 nnz-design.</span>
+
+    </div>
+
+  </footer>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
