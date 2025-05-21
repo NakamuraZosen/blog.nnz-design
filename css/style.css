@@ -112,6 +112,9 @@ header ul, footer ul{
     font-weight: bold;
     letter-spacing: .1rem;
 }
+.article h1 {
+  font-size: 1.6em;
+}
 .article h2 {
   margin: calc(var(--gap30)* 3) 0 var(--gap30) 0;
   background-color: var(--c-bg-highlight);
@@ -193,10 +196,10 @@ header ul, footer ul{
   symbols: "1";
   suffix: "| ";
 }
-ol {
+.toc ol {
   list-style: pipe;
 }
-ol ol {
+.toc ol ol {
   list-style: revert;
 }
 ol li::marker {
