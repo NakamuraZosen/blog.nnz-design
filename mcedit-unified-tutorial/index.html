@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <title>MCEditの導入と使い方 - nnz-blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#440088">
+  <meta name="keywords" content="マインクラフト,MOD,MCEdit,使い方,画像">
+  <meta name="description" content='Minecraft向けのツール「MCEdit」の導入と使い方、ワールドを開く方法、コピペ、移動などの操作を解説します。'>
+  <link href="../css/style.css" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("colorMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-in wrap">
+      <a href="/" class="svg-logo">
+        <img src="../img/NNZ-blog.svg" alt="トップページへ">
+      </a>
+      <small>マインクラフトなどのゲーム動画配信者向けに、blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
+
+    </div>
+
+  </header>
+
+  <div id="content" class="content">
+    <div id="content-in" class="content-in wrap">
+      <main class="main">
+        <article class="article">
+          <header class="article-header">
+            <h1>MCEditの導入と使い方</h1>
+            <time datetime="2025-05-21" class="entry-date">2025.05.21</time>
+            <div class="eye-catch-wrap">
+              <figure class="wp-block-image">
+                <img src="resized/4.webp" alt="">
+              </figure>
+            </div>
+          </header>
+
+          <div class="entry-content">
+            <p>
+              Minecraft向けの外部ツール「 <a href="https://podshot.github.io/MCEdit-Unified/">MCEdit</a> 」は、指定範囲のコピーアンドペーストや別のワールドとのインポート、及びエクスポートができるMODです。
+            </p>
+            <p>
+              MCEditにはver.1系列とver.2系列がありますが、今回紹介するのはver.1系列です。ver.2もすでに開発が止まっており、1と比較して機能上の利点もありませんので紹介しません。
+            </p>
+            <p>
+              我々軍事部民もよく使っていますが、それに限らず古いバージョンにMODを導入してMinecraftを遊んでいる様々な界隈でよく利用されているソフトウェアです。
+            </p>
+
+            <div id="toc" class="toc">
+              <span class="toc-title">目次</span>
+
+            </div>
+
+            <h2>導入</h2>
+            <p>
+              まず以下のどちらかにアクセスし、Windows 64bitの物をダウンロードします。(MACの方はMAC版)
+            </p>
+            <p>
+              公式ホームページはこちらです。<a href="https://podshot.github.io/MCEdit-Unified/">podshot.github.io/MCEdit-Unified/</a><br>
+              公式GitHubはこちらです。 <a href="https://github.com/Podshot/MCEdit-Unified/releases/tag/1.5.6.0">github.com/Podshot/MCEdit-Unified/releases/</a>
+            </p>
+            <p>
+              ダウンロードされたのは自己解凍インストーラーです。ダブルクリックして実行します。
+            </p>
+
+            <h2>基本操作</h2>
+            <p>まずソフトウェアを起動します。</p>
+            <h3>ワールドを開く</h3>
+            <p><span class="c">Open</span>をクリックしてワールドを選び、そのLevel.datファイルを開きます。</p>
+            <p>
+              ワールドデータが見つからない方は、C:/ユーザー/（PCの名前）/AppData/Roaming/.minecraft/（作成したバージョンのプロファイル）/savesの順にクリックしてみてください。
+              このうちAppDataは一度エクスプローラーを起動して "表示" タブの中の隠しファイルにチェックを入れていないと見えませんので注意。
+            </p>
+            <a class="wp-block-image" href="original/1.jpg">
+              <img src="resized/1.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <h3>移動と範囲選択</h3>
+            <p>WASDで移動、ShiftとSpaceで上下移動。右クリックで視点を回転し、もう一度クリックで戻ります。また、いつでもドラッグで視点を回転できます。</p>
+            <p>範囲選択は、始点と終点をクリックするか、ドラッグします。さらに、選択範囲の面をドラッグして微調整できます。</p>
+            <p>左端にメニューが表示されています。これらの使い方を以下で解説します。</p>
+            <a class="wp-block-image" href="original/2.jpg">
+              <img src="resized/2.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <h3>その他</h3>
+            <p>画面左上のメニューから、Undo、Redo、Save等の操作ができます。それにショートカットキーもそれぞれ Ctrl+Z, Ctrl+Y, Ctrl+Sとなります。</p>
+
+            <h2>コピペ</h2>
+            <h3>Copy</h3>
+            <p>範囲選択した後、<span class="c"> Copy </span>ボタンを押します。</p>
+            <p>押すと画面右上にクリップボードの内容が表示され、続けて別のものをコピーすることも可能です。</p>
+            <h3>Paste</h3>
+            <p><span class="c">Paste</span>ボタンをクリックするとプレビューが現れます。地面等をクリックするとプレビューがその位置に固定され、ドラッグして微調整します。</p>
+            <p>位置を調節した後 <span class="c">Import</span>ボタンを押します。</p>
+            <p>Pasteするとき、元あったブロックと重なる場合は上書きされます。細かな挙動はチェックボックスで設定できます。</p>
+            <ul>
+              <li>Copy Air: 選択範囲の空気ブロックを貼付けます。貼付け先の範囲内に元々あったブロックは全て削除されます。</li>
+              <li>Copy Water: 選択範囲の水ブロックを貼付けます。</li>
+            </ul>
+            <a class="wp-block-image" href="original/4.jpg">
+              <img src="resized/4.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <p>左上のメニューからOpenで別のワールドへの貼付けもできます。</p>
+
+            <h2>移動・回転・反転</h2>
+            <p>コピペの操作の応用で移動・回転・反転ができます。</p>
+            <h3>移動（Cut & Paste）</h3>
+            <p>範囲選択した後、 <span class="c">Cut</span> ボタンを押します。</p>
+            <p><span class="c">Paste</span> ボタンをクリックするとプレビューが現れ、位置を調節した後 <span class="c">Import</span> ボタンを押します。</p>
+            <h3>1ブロックずつ移動</h3>
+            <p>範囲選択した後、画面左メニューの<span class="c">Nudge</span>ボタンをクリックしながらWASD Shift Spase で1ブロックずつ移動できます。</p>
+            <h3>反転</h3>
+            <p>範囲選択した後、 <span class="c">Cut</span> ボタンを押します。</p>
+            <p><span class="c">Paste</span> ボタンをクリックするとプレビューが現れ、 <span class="c">Mirror</span> を押して反転させた後 <span class="c">Import</span> ボタンを押します。</p>
+            <p>Mirror の反転軸は視点で変えられます。</p>
+            <h3>回転</h3>
+            <p>まず範囲選択した後、 <span class="c">Delete Entities</span> を押してエンティティ（MOB等）を消します。でないとPaste時にエラーが出ます。</p>
+            <p><span class="c">Cut</span> ボタンを押します。</p>
+            <p>Paste ボタンをクリックするとプレビューが現れ、 <span class="c">Rotate</span> を押して回転させた後 <span class="c">Import</span> ボタンを押します。</p>
+            <p>リピーター等も正しく回転しますが、ドアの位置はズレます。</p>
+            <figure class="wp-block-image">
+              <img src="../hariboteaircraft-tutorial/resized/haribote-aircraft-tutorial_3.webp" alt="">
+            </figure>
+
+            <h2>フィル・リプレース・スワップ</h2>
+            <h3>フィル</h3>
+            <p>範囲選択し、画面下の Fill and Replace モード（バケツのマーク）をクリックします。</p>
+            <p>満たしたいブロックを選択して <span class="c">OK</span> をクリックし、 <span class="c">Fill</span> をクリックします。</p>
+            <p>水で満たしたい場合は、 Water (Still, Level 7 (Source)) を選択します。</p>
+            <a class="wp-block-image" href="original/5.jpg">
+              <img src="resized/5.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <h3>リプレース・スワップ</h3>
+            <p>上記で Fill をクリックする前に、小さい Replace の文字をクリックします。</p>
+            <p>Findに消したいブロックを、Replaceに設置したいブロックを選択します。ブロック名をクリックすると選択可能になります。</p>
+
+            <h2>他ワールドへのインポート・エクスポート</h2>
+            <h3>エクスポート</h3>
+            <p>範囲選択した後、 <span class="c"> Export</span> ボタンを押します。</p>
+            <p>ファイル形式を .schematic に変更して、ファイル名を付けて保存します。</p>
+            <p>既定の保存先は ドキュメント/MCEdit/Schematics です。</p>
+
+            <h3>インポート</h3>
+            <p>画面下のモード選択から Import （クレーンの様なマーク）を押します。</p>
+            <p>ファイルを選択して開くをクリックし、Pasteと同じ要領で貼りつけます。</p>　
+
+            <h2>船をエクスポートする場合の手順</h2>
+            <p>自分で作った船の作品を参加型イベントに出展する場合を想定して、手順を解説します。</p>
+            <ol>
+              <li>新規フラットワールドを作成しておく</li>
+              <li>作成した船を <a href="#heading6">コピー</a> し、フラットワールドへ貼りつける（中心位置の判断のため範囲選択は最小限で）</li>
+              <li>貼りつけるとその範囲が選択されたままになるので、そのまま Delete Entities を実行し、目的の方角に <a href="#heading12">回転</a> させる（回転不要なら飛ばす）</li>
+              <li>回転後、喫水線下が水で満たされていなければ、 <a href="#heading15">Replace</a> を利用して満たす（喫水線位置の判断のため）※回路が流されないように注意</li>
+              <li>船全体を選択して、 .schematic 形式で <a href="#heading17">Export</a> する</li>
+              <li>ワールドは保存しておき、マインクラフト内で動作確認をしておく（方角を変更すると回路の挙動が変わる可能性があるため）</li>
+            </ol>
+            <p>注意点</p>
+            <ul>
+              <li>ワールドではなくスケマティックを開くこともできるが、この場合はエンティティを削除できない。</li>
+              <li>回路にMOBを使っている場合は注意。そもそも、MOBを使った回路設計自体が不安定なため、使わないのが望ましい</li>
+            </ul>
+
+          </div>
+        </article>
+      </main>
+      <div id="sidebar" class="sidebar">
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer">
+    <div class="footer-in wrap">
+      <span class="copyright">© 2022-2025 nnz-design.</span>
+
+    </div>
+
+  </footer>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
