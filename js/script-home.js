@@ -77,3 +77,33 @@ colorMode1.addEventListener("change", () => {
   };
   localStorage.setItem("colorMode", "");
 });
+//------------------------------------------------------------------------------
+//wider
+//------------------------------------------------------------------------------
+const contentInClass = document.getElementById("content-in").classList;;
+const widthMode1 = document.getElementById("widthMode1");
+const widthMode2 = document.getElementById("widthMode2");
+const widthMode = localStorage.getItem("widthMode");
+
+  if (localStorage.getItem("widthMode") === "auto") {
+    contentInClass.add("wider");
+  } else {
+  };
+
+function refreshWidthModeRadioButton() {
+  if (widthMode === "auto") {
+    widthMode2.checked = true;
+  } else {
+    widthMode1.checked = true;
+  };
+};
+refreshWidthModeRadioButton();
+
+widthMode1.addEventListener("change", () => {
+  contentInClass.remove("wider");
+  localStorage.setItem("widthMode", "");
+});
+widthMode2.addEventListener("change", () => {
+  contentInClass.add("wider");
+  localStorage.setItem("widthMode", "auto");
+});
