@@ -91,6 +91,9 @@ a {
   margin: 0 auto;
   padding: 0 var(--gap30);
 }
+.wider {
+  max-width: none;
+}
 
 /*style for main*/
 main {
@@ -98,10 +101,11 @@ main {
   border-radius: 10px;
 }
 .main {
-  width: 770px;
+  /*width: 770px;*/
   padding: var(--gap30);
   background-color: var(--c-bg-base);
   box-sizing: border-box;
+  flex-grow: 1;
 }
 header ul, footer ul{
   list-style: none;
@@ -269,6 +273,7 @@ iframe {
 }
 .aside .new-entry {
   position: relative;
+  overflow: hidden;
 
   color: #fff;
   text-shadow: #000 0 0 5px;
@@ -291,11 +296,12 @@ iframe {
 }
 .aside .card-title {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  width: 100%;
+  bottom: 0;
 
-  vertical-align: bottom;
+  padding: .5em;
+  border-radius: 0 0 10px 10px;
 
   background-color: rgb(0 0 0 / 0.5);
 
@@ -360,6 +366,7 @@ iframe {
 .colorMode {
   border: 1px solid gray;
   border-radius: 10px;
+  margin-top: 10px;
 }
 .colorMode legend {
   font-size: small;
