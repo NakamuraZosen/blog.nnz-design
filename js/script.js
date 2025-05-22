@@ -64,6 +64,22 @@ sidebar.insertAdjacentHTML('afterbegin', `
             </label>
           </div>
         </fieldset>
+        <fieldset class="colorMode">
+          <legend>幅切り替え</legend>
+          <div>
+            <input type="radio" id="widthMode1" name="widthMode" value="1190px" checked />
+            <label for="widthMode1">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h160v-480H160v480Zm240 0h160v-480H400v480Zm240 0h160v-480H640v480Zm-240 0v-480 480Z"/></svg>
+              <span>Min</span>
+            </label>
+
+            <input type="radio" id="widthMode2" name="widthMode" value="auto" />
+            <label for="widthMode2">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h40v-480h-40v480Zm120 0h400v-480H280v480Zm480 0h40v-480h-40v480ZM280-720v480-480Z"/></svg>
+              <span>Max</span>
+            </label>
+          </div>
+        </fieldset>
         <a href="./privacy-policy/" class="privacy-policy">プライバシーポリシー・免責事項</a>
         <a class="privacy-policy" href="https://docs.google.com/forms/d/e/1FAIpQLSdh8NzM_RGn50L5WsNhh13nltpO50aodwJcDDqJiKV-cVgtsA/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer" >
           サイトの不具合等を報告
@@ -211,4 +227,34 @@ populate();
         rootClass.remove("dark");
       };
       localStorage.setItem("colorMode", "");
+    });
+    //------------------------------------------------------------------------------
+    //wider
+    //------------------------------------------------------------------------------
+    const contentInClass = document.getElementById("content-in").classList;;
+    const widthMode1 = document.getElementById("widthMode1");
+    const widthMode2 = document.getElementById("widthMode2");
+    const widthMode = localStorage.getItem("widthMode");
+
+      if (localStorage.getItem("widthMode") === "auto") {
+        contentInClass.add("wider");
+      } else {
+      };
+
+    function refreshWidthModeRadioButton() {
+      if (widthMode === "auto") {
+        widthMode2.checked = true;
+      } else {
+        widthMode1.checked = true;
+      };
+    };
+    refreshWidthModeRadioButton();
+
+    widthMode1.addEventListener("change", () => {
+      contentInClass.remove("wider");
+      localStorage.setItem("widthMode", "");
+    });
+    widthMode2.addEventListener("change", () => {
+      contentInClass.add("wider");
+      localStorage.setItem("widthMode", "auto");
     });
