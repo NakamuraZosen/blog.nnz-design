@@ -50,9 +50,12 @@
 
           <div class="entry-content">
             <p>
-              私がマインクラフトで製作したウースター級軽巡を例に、船（主に軍艦）のリグを組む手順をstep-by-stepで解説します。
+              私がマインクラフトで製作したウースター級軽巡を例に、
+              船（主に軍艦）の砲塔、砲身、及び射撃指揮装置の可動化、IKによる砲塔と砲身の制御、更にレーダーの動きと船の揺れといったアニメーションのためのリグを組む手順をstep-by-stepで解説します。
             </p>
-            <p>今回からシリーズで、砲塔、砲身、及び射撃指揮装置の可動化、IKによる砲塔と砲身の制御、更にレーダーの動きと船の揺れを再現します。</p>
+            <p>
+              最終的に、<a href="../ocean-modifier/">アニメーションする海での撮影</a>と、<a href="../blender-ship-wake/">航跡の動きと連動する設定</a>も行い、映像制作に活用することを目指します。
+            </p>
             <p>今回、第一回は砲塔、砲身、及び射撃指揮装置の可動化、（将来的にIKによる砲塔と砲身の制御も）を解説します。</p>
             <p>なお、Blenderの操作に習熟されている方は、各見出しの最初のリストを見るだけで手順を把握して頂けます。</p>
             <p>船はY軸に向いている前提で解説しますので、X軸の場合は適宜読み替えてください。</p>
@@ -73,8 +76,8 @@
 
             <h2>船のモデルの準備</h2>
             <p>
-              マインクラフトの作品をobj形式でBlenderにインポートする方法は以前の記事で解説しています。
-              <a href="../minecraft-to-blender-eevee/">【blender】マインクラフトの作品をblenderで撮影する手順【eevee篇】</a>
+              <a href="../minecraft-to-blender-eevee/">マインクラフトの作品をobj形式でBlenderにインポートする方法</a>は以前の記事で解説しています。
+              また、その前の準備として<a href="../mcedit-unified-tutorial/">MCEditを用いて作品を別のワールドにコピーする方法</a>も解説しています。
             </p>
             <p>
               Minecraft内で予め可動パーツを分割しておくとBlender上で作業しやすいでしょう。分割作業にはMCEdit等のソフトを利用できます。
@@ -146,35 +149,35 @@
               測距儀等の可動パーツも砲塔と同様に分離し、一個のオブジェクトに結合します。今回はこのオブジェクトにWorcester.Turretと命名しました。
             </p>
             <a class="wp-block-image" href="original/9.jpg">
-              <img src="resized/9.webp" alt="">
+              <img src="resized/9.webp" alt="操作画面">
             </a>
             <p>更に、分離した砲塔から、砲身を分離します。</p>
             <p>砲塔のオブジェクトを選択して編集モードに入り、砲身を先ほどと同様の操作で分離します。</p>
             <p>今度は、Toggle X-RayをOFFに、面選択モードにすると選択しやすいですよ。</p>
             <p>オブジェクトはまた砲身同士をまとめ、今回はWorcester.barrelと命名しました。</p>
             <a class="wp-block-image" href="original/10.png">
-              <img src="resized/10.webp" alt="">
+              <img src="resized/10.webp" alt="操作画面">
             </a>
             <a class="wp-block-image" href="original/11.png">
-              <img src="resized/11.webp" alt="">
+              <img src="resized/11.webp" alt="操作画面">
             </a>
             <h3>操作：砲塔をもとの位置に戻す</h3>
             <p>砲塔を浮かせている場合は、それらをもとの位置に戻します。</p>
             <p>砲塔オブジェクトを選択して編集モードに入り、砲塔を範囲選択してから<span class="k">G</span><span class="k">Z</span>でだいたいの位置を調節します</p>
             <a class="wp-block-image" href="original/12.jpg">
-              <img src="resized/12.webp" alt="">
+              <img src="resized/12.webp" alt="操作画面">
             </a>
             <p>すると画面左下にMove（移動）と書かれたメニューが出現するので、そのZの数字に整数を入力し、微調節してください。</p>
             <a class="wp-block-image" href="original/13.jpg">
-              <img src="resized/13.webp" alt="">
+              <img src="resized/13.webp" alt="操作画面">
             </a>
             <a class="wp-block-image" href="original/14.png">
-              <img src="resized/14.webp" alt="">
+              <img src="resized/14.webp" alt="操作画面">
             </a>
             <h3>操作：原点が船体中央に来るように調節</h3>
             <p>おそらく、三分割した船のモデル全ての原点がすこしだけ左右にずれているはずです。</p>
             <a class="wp-block-image" href="original/15.png">
-              <img src="resized/15.webp" alt="">
+              <img src="resized/15.webp" alt="操作画面">
             </a>
             <p>これを修正します。</p>
             <p>
@@ -182,7 +185,7 @@
               画面左下にMove（移動）と書かれたメニューが出現するので、そXの数字に0.5又は-0.5を入力し、微調節してください。
             </p>
             <a class="wp-block-image" href="original/16.png">
-              <img src="resized/16.webp" alt="">
+              <img src="resized/16.webp" alt="操作画面">
             </a>
 
             <h2>ボーンを組み上げる</h2>
@@ -202,12 +205,12 @@
             <p>アーマチュアオブジェクトを選択すると、最初のボーンが真上に向かって追加されています。このボーンにRootと命名します。</p>
             <p>編集モードに入り、ボーンを選択し、Bone Propertiesの一番上にある欄にRootと入力します</p>
             <a class="wp-block-image" href="original/18.png">
-              <img src="resized/18.webp" alt="">
+              <img src="resized/18.webp" alt="操作画面">
             </a>
             <p>ボーンが小さすぎますので、ボーンの上の丸（Tail）を選択し、<span class="k">G</span>><span class="k">Z</span>で上に伸ばします。スケールを変更しないでください。</p>
             <p>再びTailを選択し、<span class="k">G</span>><span class="k">Y</span>で前方に伸ばします。</p>
             <a class="wp-block-image" href="original/17.png">
-              <img src="resized/17.webp" alt="">
+              <img src="resized/17.webp" alt="操作画面">
             </a>
             <p>このボーンを移動させるとRootがついてきてしまうので、一度<span class="k">Y</span>キーで親子関係を解消します。そのあと砲塔のだいたいの位置に移動させます。</p>
             <p>親子関係を回復します。子ボーン>Rootの順に選択し、<span class="k">Ctrl+P</span>><span class="c">Keep Offset</span>です。RootのTailから子ボーンのHeadに向かって点線が伸びるはずです。</p>
@@ -286,7 +289,7 @@
             <p>次回はIKを設定して砲身と砲塔を一括で動かせるように設定する他、船そのものの移動と、揺れを実装していきます。</p>
 
             <a class="wp-block-image" href="original/7.png">
-              <img src="resized/7.webp" alt="">
+              <img src="resized/7.webp" alt="操作画面">
             </a>
           </div>
         </article>
