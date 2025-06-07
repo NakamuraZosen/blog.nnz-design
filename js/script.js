@@ -9,7 +9,7 @@ sidebar.insertAdjacentHTML('afterbegin', `
       <img src="../img/icon-100x100.jpg" alt="" class="avater">
     </figure>
     <div class="author-content">
-      <h3 class="author-name">紹介</h3>
+      <p class="widget-title">紹介</p>
       <div class="author-description">
         <p>
           造船専門マインクラフトプレイヤーの中村です。
