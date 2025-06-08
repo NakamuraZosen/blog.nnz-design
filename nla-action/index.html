@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <title>【Blender】NLAでキャラクターが歩くモーションと移動を合成【NLAとアクション機能の使い方】 - nnz-blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#440088">
+  <meta name="keywords" content="Blender,NLA,Acton,Animation,CG">
+  <meta name="description" content='歩くアニメーションと移動のアニメーションは別に作って合成するのが賢いやり方でしょう。この合成に、NLAを使うわけです。アクションデータはオブジェクトに対してひとつだけ紐づけられるものですが、NLAはオブジェクトに複数のアクションを紐づけられます。'>
+  <link href="../css/style.css" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("colorMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-in wrap">
+      <a href="/" class="svg-logo">
+        <img src="../img/NNZ-blog.svg" alt="トップページ">
+      </a>
+      <small>マインクラフトなどのゲーム動画配信者向けに、Blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
+
+    </div>
+
+  </header>
+
+  <div id="content" class="content">
+    <div id="content-in" class="content-in wrap">
+      <main class="main">
+        <article class="article">
+          <header class="article-header">
+            <h1>【Blender】NLAでキャラクターが歩くモーションと移動を合成【NLAとアクション機能の使い方】</h1>
+            <time datetime="2025-06-08" class="entry-date">2025.06.08</time>
+            <div class="eye-catch-wrap">
+              <figure class="wp-block-image">
+                <img src="resized/1.webp" alt="アイキャッチ">
+              </figure>
+            </div>
+          </header>
+
+          <div class="entry-content">
+            <p>
+              歩くアニメーションと移動量のアニメーションを混在させたくない！
+            </p>
+            <p>
+              歩くアニメーションと移動のアニメーションは別に作って合成するのが賢いやり方でしょう。
+              ゲームではプレイヤーの入力に対して動かなければいけませんから、歩くアニメーションと移動量は当然別に決められています。
+              今回はBlender上でアニメーションを作ることを想定していますが、それでも同じです。この合成に、NLAを使うわけです。
+            </p>
+            <p>
+              しかしながらその機能の使い方が難しいので、私はかなり困りました。この記事ではBlenderのNLA機能を使う上で知っておくと理解の助けになることを紹介します。
+            </p>
+            <p>
+              なお、アニメーションに活用しない<a href="../blender-pose-clear/">モデリング中でのポーズの操作</a>はこちらの記事で解説しています。
+            </p>
+
+            <div id="toc" class="toc">
+              <span class="toc-title">目次</span>
+
+            </div>
+
+            <h2>NLAとアクションの仕様</h2>
+            <p>
+              使用する前に、知っておかなければまずい知識がいくつかあります。
+            </p>
+            <h3>アクション</h3>
+            <p>
+              中身はキーフレームの情報で、アニメーションタブ内での操作だけでなく、最初の画面で直接キーフレームを打った時もアクションデータが生成されています。
+              データブロックの一種ですので、今後はアクションデータとも呼んでいきます。
+            </p>
+            <p>最も重要な常識として、アクションデータはオブジェクトに対してひとつだけ紐づけられるものです。</p>
+            <h3>NLA</h3>
+            <p>
+              上記の常識から外れ、オブジェクトに複数のアクションを紐づける仕組みです。これ自体も、自動的にオブジェクトに紐づけられています。
+            </p>
+            <p>また、ややこしいことにひとつのオブジェクトに、直接紐づけたアクションとNLAを介したものとを両方紐づけることもできます。</p>
+            <a class="wp-block-image" href="original/1.jpg">
+              <img src="resized/1.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+
+            <h2>画面のみかた</h2>
+            <p>実際に、歩くアニメーションと移動量のアニメーションをNLAで合成したときのAnimationタブの画面です。左上はNLAエディターに変更しています。</p>
+            <p>特に、ドープシート画面の挙動は初手では理解しにくいです。</p>
+            <a class="wp-block-image" href="original/2.png">
+              <img src="resized/2.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <h3>ドープシート</h3>
+            <p>
+              画面下のタイムラインです。モードを<span class="c">Dope Sheet</span>から<span class="c">Action Editor</span>に切り替えると、キーフレームを打った時に生成されたCubeActionとかArmatureActionといった名前がついているのがわかります。
+              ここに表示されるのは、オブジェクトにNLAを介さずオブジェクトに直接紐づけられたアクションです。
+            </p>
+            <p>
+              <span class="c">Push Down</span>というボタンを押すとこのアクションがNLAに移動し、アクションエディターは再び空に戻ります。
+            </p>
+            <p>空に戻った後、再びキーフレームを打つと、今度は新しいアクションがNLAを介さずオブジェクトに直接紐づけられます。</p>
+            <a class="wp-block-image" href="original/3.jpg">
+              <img src="resized/3.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <h3>NLAエディター</h3>
+            <p>NLAは初期状態では表示されませんので画面を切り替えておきます。</p>
+            <p>
+              黒い帯が先ほどNLAに移動したアクションであり、これをストリップと呼びます。
+              Push Downするたびに新しいレイヤーが作られ、上下に重なっている部分は上のものが優先されます。<span class="c">サイドバーにあるBlending</span>をReplaceからAdd（Combine）に変更すると、合成されます。
+              サイドバーの<span class="c">Repeat</span>の数字を増やすとリピート再生されます。
+            </p>
+            <p>
+              NLAの一番上にあるオレンジの少し薄くなったレイヤーは、オブジェクトに直接紐づけられたアクションを表しています。レイヤー名の部分をクリックすると、これもまたBlendingを変更できます。
+              直接紐づけたアクションとNLAを介したものとを両方紐づけることもできますが、わかりやすさを重視するなら常にすべてのアクションをNLAに入れておいた方がいいかもしれません。
+            </p>
+            <p>なお、ストリップの名前と、それに紐づけられているアクションデータの名前は一致していませんので注意してください。</p>
+            <a class="wp-block-image" href="original/4.jpg">
+              <img src="resized/4.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+            <a class="wp-block-image" href="original/5.jpg">
+              <img src="resized/5.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）"　/>
+            </a>
+
+            <h2>ストリップの操作</h2>
+            <h3>編集</h3>
+            <p>
+              ストリップを選択し、<span class="k">Tab</span>キーを押すとそのストリップに紐づけられたアクションを編集できます。編集中はアクションエディターにそのアクションが表示され、元あったアクションは一時的に適用されなくなります。
+              これが迷惑なら、元あったアクションもいったん<span class="c">Push Down</span>するとよいでしょう。（Tabキーを使わずPush Downボタンの横にある上下ボタンをクリックすると適用されたまま編集できるようです。）
+            </p>
+            <h3>複製</h3>
+            <p>
+              ストリップもオブジェクトと同様に、<span class="k">Shift + D</span>で複製、<span class="k">Alt + D</span>でリンク複製できます。Shift + Dならアクションデータも複製され、Alt + Dなら元のアクションデータを共有します。
+            </p>
+            <h3>移動</h3>
+            <p>ドラッグか<span class="k">G</span>キーで移動できます。また、<span class="k">G</span> <span class="k">Y</span> と押せば垂直移動もできます。</p>
+
+            <h2>フェイクユーザーとは</h2>
+            <p>Blenderは紐づけのないデータブロックをセーブファイルに保存しません。</p>
+            <p>
+              アクションデータを整理する過程でNLAにもオブジェクトにも紐づけず、そのまま忘れてしまうとアクションデータが消えてしまいます。
+              フェイクユーザーをオンにしておくと紐づけのないデータブロックも保存されますので、使いまわしのきく重要なアクションにはフェイクユーザーをオンにしておくと安心です。
+            </p>
+
+            <h2>×ボタンは「削除」ではない</h2>
+            <p>アクションエディターで、<span class="c">アクション名の横にある×ボタン</span>を押すとアクションデータも消えてしまいそうな印象を受けますが、これは紐づけを解除するだけであって「削除」ではありません。</p>
+            <p>
+              例えば、アニメーションの案を二つ作って見比べたいときは、一度作ったアクションをフェイクユーザーをオンにしてから×で消し、もう一つのアクションを作れば良いです。
+              最初の案に戻すこともできますし、没案はフェイクユーザーをオフにしておけば勝手に消えます。
+            </p>
+
+            <h2>オブジェクトを複製するとアクションも複製される？</h2>
+            <p>オブジェクトに直接紐づけられたアクションは、オブジェクトを複製すると同時に複製され、.001と番号を付けて分けられます。フェイクユーザーは必ずオフの状態になります。</p>
+            <p>NLAを介したアクションは複製されず、同じアクションデータを共有しています。共有したくないときは、ストリップもShift + Dで複製するとアクションデータが複製されます。</p>
+          </div>
+        </article>
+      </main>
+      <div id="sidebar" class="sidebar">
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer">
+    <div class="footer-in wrap">
+      <span class="copyright">© 2022-2025 nnz-design.</span>
+
+    </div>
+
+  </footer>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
