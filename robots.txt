@@ -1,1 +1,3 @@
 Sitemap: https://blog.nnz-design.com/sitemap.xml
+User-agent: Googlebot
+Disallow: /
