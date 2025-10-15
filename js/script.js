@@ -80,7 +80,7 @@ sidebar.insertAdjacentHTML('afterbegin', `
             </label>
           </div>
         </fieldset>
-        <a href="./privacy-policy/" class="privacy-policy">プライバシーポリシー・免責事項</a>
+        <a href="/privacy-policy/" class="privacy-policy">プライバシーポリシー・免責事項</a>
         <a class="privacy-policy" href="https://docs.google.com/forms/d/e/1FAIpQLSdh8NzM_RGn50L5WsNhh13nltpO50aodwJcDDqJiKV-cVgtsA/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer" >
           サイトの不具合等を報告
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 -960 960 960">
