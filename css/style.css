@@ -75,6 +75,7 @@ a {
     justify-content: center;
 }
 .copyright {
+  font-weight: bold;
 }
 
 /**/
@@ -167,6 +168,8 @@ header ul, footer ul{
   display: block;
   margin-bottom: var(--gap30);
   font-size: .8em;
+  font-weight: bold;
+  color: var(--c-l);
   letter-spacing: .2rem;
 }
 .toc {
@@ -325,6 +328,7 @@ iframe {
 .author-thum {
     background-image: url(../img/art-370x200.jpg);
     background-size: cover;
+    background-position: center;
     height: 200px;
     margin: 0 0 50px;
     width: 100%;
