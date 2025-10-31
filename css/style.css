@@ -225,6 +225,14 @@ li::before {
   font-weight: bold;
 }
 */
+/**********AdSense************************************************/
+.ad_rectangle {
+  margin: 1em 0;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 15px;;
+}
+/**********Content************************************************/
 img {
   vertical-align: middle;
   height: auto;
