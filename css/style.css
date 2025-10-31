@@ -41,7 +41,7 @@ a {
   word-wrap: break-word;
 }
 
-/*style for header*/
+/**********style for header**************************************************/
 .header {
   background: linear-gradient(to left, #c3dab8, 20%, #6a4390);
 }
@@ -75,10 +75,11 @@ a {
     justify-content: center;
 }
 .copyright {
-  font-weight: bold;
+  font-weight: bold;  
+  color: var(--c-l);
 }
 
-/**/
+/**********style for article area**************************************************/
 .content {
   margin: var(--gap30) 0;
   position: relative;
@@ -97,8 +98,7 @@ a {
 .wider {
   max-width: none;
 }
-
-/*style for main*/
+/**********style for main**************************************************/
 main {
   line-height: 1.8;
   border-radius: 10px;
@@ -225,14 +225,14 @@ li::before {
   font-weight: bold;
 }
 */
-/**********AdSense************************************************/
+/**********AdSense**************************************************/
 .ad_rectangle {
   margin: 1em 0;
   border: 1px solid gray;
   border-radius: 10px;
   padding: 15px;;
 }
-/**********Content************************************************/
+/**********Content**************************************************/
 img {
   vertical-align: middle;
   height: auto;
@@ -265,7 +265,7 @@ iframe {
   height: auto;
 }
 
-/*style for sidebar*/
+/**********style for sidebar**************************************************/
 .sidebar {
   flex-shrink: 0;
   width: 370px;
@@ -403,11 +403,9 @@ iframe {
   color: var(--c-l);
   font-size: small;
 }
-/*style for phone*/
+
+/**********style for mobile**************************************************/
 @media screen and (max-width: 1210px) {
-  .header-in {
-    height: 30vw;
-  }
   .logo {
     text-align: center;
     font-size: 10vw;
@@ -442,7 +440,7 @@ iframe {
   }
 }
 
-/*style for top page*/
+/**********style for top page**************************************************/
 .top-img {
   height: 500px;
   width: 100%;
