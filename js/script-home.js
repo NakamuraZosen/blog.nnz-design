@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 async function populate() {
   const requestURL =
-    "https://zosen.nnz-design.com/page.json";
+    "https://blog.nnz-design.com/page.json";
   const request = new Request(requestURL);
 
   const response = await fetch(request);
