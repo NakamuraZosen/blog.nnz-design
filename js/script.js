@@ -33,7 +33,6 @@ sidebar.insertAdjacentHTML('afterbegin', `
           </svg>
         </a>
         <ul>
-          <li>当サイトはGoogle Analyticsを使用していません。</li>
           <li>当サイトはリンクフリーです。</li>
         </ul>
         <fieldset class="colorMode">
