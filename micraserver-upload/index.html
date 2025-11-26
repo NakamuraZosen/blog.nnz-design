@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <title>マイクラサーバーにワールドをアップロードする方法 - nnz-blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#440088">
+  <meta name="keywords" content="マインクラフト,MOD,MCEdit,使い方,画像">
+  <meta name="description" content='Minecraft向けのツール「MCEdit」の導入と使い方、ワールドを開く方法、コピペ、移動などの操作を解説します。'>
+  <link href="../css/style.css" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("colorMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-in wrap">
+      <a href="/" class="svg-logo">
+        <img src="../img/NNZ-blog.svg" alt="トップページへ">
+      </a>
+      <small>マインクラフトなどのゲーム動画配信者向けに、blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
+
+    </div>
+
+  </header>
+
+  <div id="content" class="content">
+    <div id="content-in" class="content-in wrap">
+      <main class="main">
+        <article class="article">
+          <header class="article-header">
+            <h1>マイクラサーバーにワールドをアップロードする方法</h1>
+            <div class="entry-date">
+              <p><time datetime="2025-11-15">2025.11.15</time> 作成</p>
+            </div>
+            <div class="eye-catch-wrap">
+              <figure class="wp-block-image">
+                <img src="resized/4.webp" alt="">
+              </figure>
+            </div>
+          </header>
+
+          <div class="entry-content">
+            <p>
+              マイクラサーバーにお手持ちのワールドをアップロードする方法を解説します。もちろん、ダウンロードも可能です。
+            </p>
+            <p>
+              マイクラサーバー向けレンタルサーバーの場合、VPSや自宅サーバーなどSSH接続できる環境での操作を両方解説します。
+            </p>
+            <p>
+              ワールドバージョンは、サーバーのバージョンと同じか、少し古いものなら対応しています。
+            </p>
+            <p>
+              使用するソフトは、どちらの場合でもWinSCPを例にします。
+            </p>
+
+            <div id="toc" class="toc">
+              <span class="toc-title">目次</span>
+
+            </div>
+
+            <h2>ソフト (FTPクライアント) を用意</h2>
+            <p>
+              ソフトを用意します。今回はWinSCPを使用しますが、その他でも操作はほとんど同じだと思います。
+            </p>
+            <a href="https://winscp.net/eng/download.php" target="_blank" rel="noopener noreferrer">WinSCP公式サイトダウンロードページ</a>
+
+            <h2>レンタルサーバーの場合</h2>
+            <p>
+              多くのレンタルサーバーでは、FTPでのワールドアップロードに対応していますので、それを利用します。接続確立までの手順は、ご契約のレンタルサーバーのマニュアルもご確認ください。
+            </p>
+            <h3>ブラウザでの準備</h3>
+            <p>契約しているレンタルサーバーのアカウントにログインしてください。</p>
+            <p>
+              多くのレンタルサーバーでは、ワールドのアップロードのためにFTP接続用のIP、ユーザー名、パスワードが用意されているはずですので、それを探してください。
+              もし、その近くに「接続を開始」などボタンがある場合は押しておいてください。セキュリティのため時間制限があるかもしれません。
+            </p>
+            <p>例として、 <a href="https://games.xserver.ne.jp/game-server/minecraft/" target="_blank" rel="noopener noreferrer">XServer Games</a> の管理画面を掲載します。</p>
+            <a class="wp-block-image" href="original/5e.png">
+              <img src="resized/5.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+            </a>
+            <h3>接続の確立</h3>
+            <p>WinSCPを起動し、転送プロトコルにFTPを選択します。</p>
+            <p>ホスト名 (IPアドレス)、ポート番号、ユーザー名、パスワードを入力し、<span class="c">ログイン</span>をクリックします。</p>
+            <p>接続を確立しましたら、<a href="#heading8">アップロードの項目</a> へ進んでください。</p>
+            <a class="wp-block-image" href="original/1e.png">
+              <img src="resized/1.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+              <small>クリックで元のサイズの画像を表示します</small>
+            </a>
+
+            <h2>VPSや自宅サーバーの場合</h2>
+            <p>
+              VPSや自宅サーバーの場合は、SFTPというSSH上で働くプロトコルを使用します。これらのサーバーを運用されている方はすでにSSHで接続できる状態になっているでしょうから、それなら追加の設定が要りません。
+            </p>
+            <p>私はこのことに気づかず、わざわざFTPサーバーの設定とファイアウォールの設定をやっていました。</p>
+            <p>ただし、鍵認証に限定している場合はひと手間必要です。</p>
+            <h3>権限の確認</h3>
+            <p>これは、わかりきっているなら不要です。</p>
+            <p>SSHでの接続や、今回のSFTPで接続するユーザーがマイクラサーバーのworldディレクトリをwriteする権限を持っている必要があります。</p>
+            <p>標準では所有者（マイクラサーバーを最初に起動したときのユーザー）のみwrite権限を持っていますので、所有者以外のユーザーでSSHする場合はchmodしておいてください。</p>
+            <h3>パスワード認証の場合</h3>
+            <p>プロトコルに、SFTPを選びます。ポート番号にはSSHのポートを入力します。</p>
+            <p>パスワード認証の場合は、ホスト名 (IP)と、ユーザー名、パスワードを入力し、ログインをクリックすると接続できるはずです。</p>
+
+            <h3>鍵認証の場合</h3>
+            <p>鍵認証の場合は、準備としてお手持ちの秘密鍵をppk化する必要があります。</p>
+            <p><span class="c">ツール > PuTTYgen を実行</span> をクリック</p>
+            <a class="wp-block-image" href="original/2e.png">
+              <img src="resized/2.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+            </a>
+            <p>設定をクリックし、 <span class="c">SSH > 認証 > 認証条件 > 秘密鍵 の右の…</span>をクリックし、先ほど生成したppkを選択。OKで戻る。</p>
+            <a class="wp-block-image" href="original/3e.png">
+              <img src="resized/3.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+            </a>
+            
+            <p>プロトコルにSFTPを選択、ホスト名（IP）と、ユーザー名を入力し、ログインをクリックします。パスワードは空欄にします。ポート番号にはSSHのポートを入力します。</p>
+            <p>鍵にパスフレーズを設定しているなら、この後に入力します。</p>
+
+            <h2>アップロード</h2>
+            <p>ログインできたら、画面左にPC、右にサーバーが表示されていると思いますので、サーバー側で "world" フォルダを探します。</p>
+            <p>用意したワールドのフォルダのデータを Ctrl + Aで全選択し、サーバーのworldフォルダにドラッグアンドドロップし、ファイルを置き換えます。</p>            
+            <a class="wp-block-image" href="original/4e.png">
+              <img src="resized/4.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+            </a>
+            <p>アップロードはこれで終了です。サーバーを再起動してください。</p>
+
+          </div>
+        </article>
+      </main>
+      <div id="sidebar" class="sidebar">
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer">
+    <div class="footer-in wrap">
+      <span class="copyright">© 2022-2025 nnz-design.</span>
+
+    </div>
+
+  </footer>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
