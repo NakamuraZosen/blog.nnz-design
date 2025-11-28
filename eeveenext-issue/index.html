@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <title>Blender 4 以降のEeveeが汚い - nnz-blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#440088">
+  <meta name="keywords" content="マインクラフト,MOD,MCEdit,使い方,画像">
+  <meta name="description" content='新しいプロジェクト開始をきっかけにBlender 4.x を試して愕然としました。太陽の影が薄い、AOが薄い等。今回は、Eeveeの仕様変更に伴う影響と、対策を考えました。'>
+  <link href="../css/style.css" rel="stylesheet">
+  <script type="text/javascript">
+  const e = localStorage.getItem("colorMode");
+    if (e === "light" || e === "dark") {
+      document.documentElement.classList.add(e);
+    } else {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-in wrap">
+      <a href="/" class="svg-logo">
+        <img src="../img/NNZ-blog.svg" alt="トップページへ">
+      </a>
+      <small>マインクラフトなどのゲーム動画配信者向けに、blenderなどの3DCGを利用した動画や画像の作り方を解説</small>
+
+    </div>
+
+  </header>
+
+  <div id="content" class="content">
+    <div id="content-in" class="content-in wrap">
+      <main class="main">
+        <article class="article">
+          <header class="article-header">
+            <h1>Blender 4 以降のEeveeが汚い</h1>
+            <div class="entry-date">
+              <p><time datetime="2025-11-25">2025.11.25</time> 作成</p>
+            </div>
+            <div class="eye-catch-wrap">
+              <figure class="wp-block-image">
+                <img src="resized/thumbnail.webp" alt="">
+              </figure>
+            </div>
+          </header>
+
+          <div class="entry-content">
+            <p>私は今まで、モデリングにも撮影にもBlender 3.6 LTSを使用してきましたが、新しいプロジェクト開始をきっかけにBlender 4.x を試して愕然としました。</p>
+            <p>影も光もメリハリなく、のっぺりとした汚い画像になったからです。今回は、Eeveeの仕様変更に伴う影響と、対策を考えました。</p>
+            <p>結論から申し上げますと、Blender 3.6 LTS の使用を継続することに決めました。永住です。</p>
+
+            <div id="toc" class="toc">
+              <span class="toc-title">目次</span>
+
+            </div>
+
+            <h2>太陽の影が薄い</h2>
+            <h3>現状</h3>
+            <p>4.xのEeveeの標準設定では、太陽から落ちる影が薄くなりました。</p>
+            <p>参考として、3.6でAOをオフにしたものと、4.5でレイトレーシングをオフにしたものを比較しました。</p>
+            <a class="wp-block-image" href="original/1.jpg">
+              <img src="resized/1.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+              <small>クリックで元のサイズの画像を表示します</small>
+            </a>
+            <p>レイトレーシングが原因かなという印象がありましたが、関係ありませんでした。しかし、これには対処法がありました。</p>
+            <h3>対策</h3>
+            <p>Render Properties > Sampling > Shadows > Steps: 1と設定すると、こちら。</p>
+            <a class="wp-block-image" href="original/2.jpg">
+              <img src="resized/2.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+            </a>
+            <p>ほとんど期待通りとなりました。</p>
+
+            <h2>AOが薄い</h2>
+            <h3>現状</h3>
+            <p>4.xのEeveeはAOが薄いです。</p>
+            <p>一見すると、4.xのEeveeにはAOに関する設定項目がありませんが、一応、レイトレーシング設定項目のなかに、GI（グローバルイルミネーション）との選択制でAOの項目があります。</p>
+            <a class="wp-block-image" href="original/5e.jpg">
+              <img src="resized/5.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+            </a>
+            <p>参考として、3.6での画像と、4.xのAOを標準設定で使用したものを比較しました。</p>
+            <a class="wp-block-image" href="original/3.jpg">
+              <img src="resized/3.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+            </a>
+            <p>以前のように濃い影は出ません。続いて、Thresholdを0.5にStepsを32にするなど設定を煮詰めて可能な限り濃くしたものを比較しました。</p>
+            <a class="wp-block-image" href="original/4.jpg">
+              <img src="resized/4.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+            </a>
+            <h3>対策</h3>
+            <p>色々弄りましたが、以前のように強いAOを掛けられませんでした。見た目に大きく影響しますので、これを諦めるわけには行きません。これがネックで4.xへの移住ができません。</p>
+            <p>4.xのEeveeではBiasが影の濃さに関係するようですが、最大に設定しても以前ほど濃くはなりません。</p>
+            <p>現状、最もAOを濃くできる設定は以下の通りです。</p>
+            <p>Render Properties > Raytracing > Fast GI Approximation</p>
+            <ul>
+              <li>Method: Ambient Occlusion</li>
+              <li>Step: 高め (32くらい)</li>
+            </ul>
+
+            <h2>海洋モディファイアの読み込み方</h2>
+            <p>以前のバージョンでは、海洋モディファイアで出力したexp画像をBumpノードを介してNromalに読み込ませることができましたが、Blender 4 以降は、Displacenemntとして読み込ませる必要があります。</p>
+            <a class="wp-block-image" href="original/6.jpg">
+              <img src="resized/6.webp" alt="操作画面" title="操作画面（クリックで元のサイズの画像を表示します）">
+            </a>
+
+          </div>
+        </article>
+      </main>
+      <div id="sidebar" class="sidebar">
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer id="footer" class="footer">
+    <div class="footer-in wrap">
+      <span class="copyright">© 2022-2025 nnz-design.</span>
+
+    </div>
+
+  </footer>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
