@@ -97,11 +97,17 @@ sidebar.insertAdjacentHTML('afterbegin', `
 
   </div>
 </aside>
+<aside class="aside">
+  <div class="widget-title">同じカテゴリの新着記事</div>
+  <div id="list-same-entries" class="list-new-entries">
+
+  </div>
+</aside>
 `);
 //------------------------------------------------------------------------------
-//entry | reference: https://developer.mozilla.org/ja/docs/Learn/JavaScript/Objects/JSON
+//new entry | reference: https://developer.mozilla.org/ja/docs/Learn/JavaScript/Objects/JSON
 //------------------------------------------------------------------------------
-async function populate() {
+async function request() {
   const requestURL =
     "https://blog.nnz-design.com/page.json";
   const request = new Request(requestURL);
@@ -110,150 +116,170 @@ async function populate() {
   const pages = await response.json();
 
   populateEntryList(pages);
+  populateSameCategorys(pages);
 };
-function populateEntryList(obj) {
-  console.log(obj);
+function populate(listNewEntries, obj, i) {
+  const anchor = document.createElement("a");
+  anchor.href = ".." + obj[i].href;
+  anchor.className = "new-entry";
 
+  const figure = document.createElement("figure");
+  figure.className = "entry-card-thumb";
+
+  const img = document.createElement("img");
+  img.src = ".." + obj[i].thumbnail;
+  img.alt = "thumbnail";
+
+  const span = document.createElement("span");
+  span.textContent = obj[i].title;
+  span.className = "card-title"
+
+  listNewEntries.appendChild(anchor);
+  anchor.appendChild(figure);
+  figure.appendChild(img);
+  anchor.appendChild(span);
+}
+// all category
+function populateEntryList(obj) {
   const listNewEntries = document.getElementById('list-new-entries');
 
-  for (var i = 0; i < obj.length; i++) {
-
-    const anchor = document.createElement("a");
-    anchor.href = ".." + obj[i].href;
-    anchor.className = "new-entry";
-
-    const figure = document.createElement("figure");
-    figure.className = "entry-card-thumb";
-
-    const img = document.createElement("img");
-    img.src = ".." + obj[i].thumbnail;
-    img.alt = "thumbnail";
-
-    const span = document.createElement("span");
-    span.textContent = obj[i].title;
-    span.className = "card-title"
-
-    listNewEntries.appendChild(anchor);
-    anchor.appendChild(figure);
-    figure.appendChild(img);
-    anchor.appendChild(span);
-
+  for (var i = 0; i < 3; i++) {
+    populate(listNewEntries, obj, i);
   };
 };
-populate();
+// same category
+function populateSameCategorys(obj) {
+  const listNewEntries = document.getElementById('list-same-entries');
+  const currentPage = location.pathname.split("/")[1];
+  // const currentPage = "micraserver-upload";
+  const currentIndex = obj.findIndex(item => item.href == "/" + currentPage + "/");
+  console.log("slag:" + currentPage + " / index:" + currentIndex);
+
+  for (var i = 0; i < obj.length; i++) {
+    if (currentIndex == -1) {
+      const p = document.createElement("p");
+      p.textContent = "なし";
+      listNewEntries.appendChild(p);
+      break;
+    } else if (obj[i].cat == obj[currentIndex].cat) {
+      populate(listNewEntries, obj, i);
+    };
+  };
+};
+request();
 //------------------------------------------------------------------------------
 //table of content | reference: https://cookbook88.com/js-cookbook/heading/table-of-contents.php
 //------------------------------------------------------------------------------
 // 設定
-    const TOC_INSERT_SELECTOR = '#toc';              // [セレクター指定] 目次を挿入する要素 querySelector用
-    const HEADING_SELECTOR    = 'h2,h3,h4,h5,h6'; // [セレクター指定] 収集する見出し要素 querySelectorAll用
-    const LINK_CLASS_NAME     = 'tocLink';           // [クラス名] 目次用aタグに追加するクラス名     .無し
-    const ID_NAME             = 'heading';           // [ID名]    目次に追加するID名のプレフィックス #無し
-    const tocInsertElement    = document.querySelector(TOC_INSERT_SELECTOR);
-    const headingElements     = document.querySelectorAll(HEADING_SELECTOR);
-    const layer = [];
-    let id = 0;
-    const uid   = () =>`${ID_NAME}${id++}`;
-    let oldRank = -1;
-    try {
-        const createLink = (el) => {
-            let li = document.createElement('li');
-            let a  = document.createElement('a');
-            el.id  = el.id || uid();
-            a.href = `#${el.id}`;
-            a.innerText = el.innerText;
-            a.className = LINK_CLASS_NAME;
-            li.appendChild(a);
-            return li;
-        };
-        const findParentElement = (layer, rank, diff) => {
-            do {
-                rank += diff;
-                if (layer[rank]) return layer[rank];
-            } while (0 < rank && rank < 7);
-            return false;
-        };
-        const appendToc = (el, toc) => {
-            el.appendChild(toc.cloneNode(true));
-        };
-        headingElements.forEach( (el) => {
-            let rank   = Number(el.tagName.substring(1));
-            let parent = findParentElement(layer, rank, -1);
-            if (oldRank > rank) layer.length = rank + 1;
-            if (!layer[rank]) {
-                layer[rank] = document.createElement('ol');
-                if (parent.lastChild) parent.lastChild.appendChild(layer[rank]);
-            }
-            layer[rank].appendChild(createLink(el));
-            oldRank = rank;
-        });
-        if (layer.length) appendToc(tocInsertElement, findParentElement(layer, 0, 1));
-    } catch (e) {
-        //error
+const TOC_INSERT_SELECTOR = '#toc';              // [セレクター指定] 目次を挿入する要素 querySelector用
+const HEADING_SELECTOR = 'h2,h3,h4,h5,h6'; // [セレクター指定] 収集する見出し要素 querySelectorAll用
+const LINK_CLASS_NAME = 'tocLink';           // [クラス名] 目次用aタグに追加するクラス名     .無し
+const ID_NAME = 'heading';           // [ID名]    目次に追加するID名のプレフィックス #無し
+const tocInsertElement = document.querySelector(TOC_INSERT_SELECTOR);
+const headingElements = document.querySelectorAll(HEADING_SELECTOR);
+const layer = [];
+let id = 0;
+const uid = () => `${ID_NAME}${id++}`;
+let oldRank = -1;
+try {
+  const createLink = (el) => {
+    let li = document.createElement('li');
+    let a = document.createElement('a');
+    el.id = el.id || uid();
+    a.href = `#${el.id}`;
+    a.innerText = el.innerText;
+    a.className = LINK_CLASS_NAME;
+    li.appendChild(a);
+    return li;
+  };
+  const findParentElement = (layer, rank, diff) => {
+    do {
+      rank += diff;
+      if (layer[rank]) return layer[rank];
+    } while (0 < rank && rank < 7);
+    return false;
+  };
+  const appendToc = (el, toc) => {
+    el.appendChild(toc.cloneNode(true));
+  };
+  headingElements.forEach((el) => {
+    let rank = Number(el.tagName.substring(1));
+    let parent = findParentElement(layer, rank, -1);
+    if (oldRank > rank) layer.length = rank + 1;
+    if (!layer[rank]) {
+      layer[rank] = document.createElement('ol');
+      if (parent.lastChild) parent.lastChild.appendChild(layer[rank]);
     }
-    //------------------------------------------------------------------------------
-    //mode switch
-    //------------------------------------------------------------------------------
-    const rootClass = document.documentElement.classList;
-    const colorMode1 = document.getElementById("colorMode1");
-    const colorMode2 = document.getElementById("colorMode2");
-    const colorMode3 = document.getElementById("colorMode3");
-    const colorMode = localStorage.getItem("colorMode");
+    layer[rank].appendChild(createLink(el));
+    oldRank = rank;
+  });
+  if (layer.length) appendToc(tocInsertElement, findParentElement(layer, 0, 1));
+} catch (e) {
+  //error
+}
+//------------------------------------------------------------------------------
+//mode switch
+//------------------------------------------------------------------------------
+const rootClass = document.documentElement.classList;
+const colorMode1 = document.getElementById("colorMode1");
+const colorMode2 = document.getElementById("colorMode2");
+const colorMode3 = document.getElementById("colorMode3");
+const colorMode = localStorage.getItem("colorMode");
 
-    function refreshRadioButton() {
-      if (colorMode === "dark") {
-        colorMode3.checked = true;
-      } else if (colorMode == "light") {
-        colorMode2.checked = true;
-      } else {
-        colorMode1.checked = true;
-      };
-    };
-    refreshRadioButton();
+function refreshRadioButton() {
+  if (colorMode === "dark") {
+    colorMode3.checked = true;
+  } else if (colorMode == "light") {
+    colorMode2.checked = true;
+  } else {
+    colorMode1.checked = true;
+  };
+};
+refreshRadioButton();
 
-    colorMode3.addEventListener("change", () => {
-      rootClass.add("dark");
-      localStorage.setItem("colorMode", "dark");
-    });
-    colorMode2.addEventListener("change", () => {
-      rootClass.remove("dark");
-      localStorage.setItem("colorMode", "light");
-    });
-    colorMode1.addEventListener("change", () => {
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        rootClass.add("dark");
-      } else {
-        rootClass.remove("dark");
-      };
-      localStorage.setItem("colorMode", "");
-    });
-    //------------------------------------------------------------------------------
-    //wider
-    //------------------------------------------------------------------------------
-    const contentInClass = document.getElementById("content-in").classList;;
-    const widthMode1 = document.getElementById("widthMode1");
-    const widthMode2 = document.getElementById("widthMode2");
-    const widthMode = localStorage.getItem("widthMode");
+colorMode3.addEventListener("change", () => {
+  rootClass.add("dark");
+  localStorage.setItem("colorMode", "dark");
+});
+colorMode2.addEventListener("change", () => {
+  rootClass.remove("dark");
+  localStorage.setItem("colorMode", "light");
+});
+colorMode1.addEventListener("change", () => {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    rootClass.add("dark");
+  } else {
+    rootClass.remove("dark");
+  };
+  localStorage.setItem("colorMode", "");
+});
+//------------------------------------------------------------------------------
+//wider
+//------------------------------------------------------------------------------
+const contentInClass = document.getElementById("content-in").classList;;
+const widthMode1 = document.getElementById("widthMode1");
+const widthMode2 = document.getElementById("widthMode2");
+const widthMode = localStorage.getItem("widthMode");
 
-      if (localStorage.getItem("widthMode") === "auto") {
-        contentInClass.add("wider");
-      } else {
-      };
+if (localStorage.getItem("widthMode") === "auto") {
+  contentInClass.add("wider");
+} else {
+};
 
-    function refreshWidthModeRadioButton() {
-      if (widthMode === "auto") {
-        widthMode2.checked = true;
-      } else {
-        widthMode1.checked = true;
-      };
-    };
-    refreshWidthModeRadioButton();
+function refreshWidthModeRadioButton() {
+  if (widthMode === "auto") {
+    widthMode2.checked = true;
+  } else {
+    widthMode1.checked = true;
+  };
+};
+refreshWidthModeRadioButton();
 
-    widthMode1.addEventListener("change", () => {
-      contentInClass.remove("wider");
-      localStorage.setItem("widthMode", "");
-    });
-    widthMode2.addEventListener("change", () => {
-      contentInClass.add("wider");
-      localStorage.setItem("widthMode", "auto");
-    });
+widthMode1.addEventListener("change", () => {
+  contentInClass.remove("wider");
+  localStorage.setItem("widthMode", "");
+});
+widthMode2.addEventListener("change", () => {
+  contentInClass.add("wider");
+  localStorage.setItem("widthMode", "auto");
+});
