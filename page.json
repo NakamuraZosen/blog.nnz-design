@@ -1,15 +1,15 @@
 [
-  {"href":"/eeveenext-issue/","title":"Blender 4 以降のEeveeが汚い","thumbnail":"/eeveenext-issue/resized/thumbnail.webp"},
-  {"href":"/micraserver-upload/","title":"マイクラサーバーにワールドをアップロードする方法","thumbnail":"/micraserver-upload/resized/4.webp"},
-  {"href":"/litematica-tutorial/","title":"Litematicaの使い方","thumbnail":"/litematica-tutorial/resized/litematica_7.webp"},
-  {"href":"/hariboteaircraft-tutorial/","title":"はりぼてエアクラフトの導入と使い方と設定方法","thumbnail":"/hariboteaircraft-tutorial/resized/haribote-aircraft-tutorial_1.webp"},
-  {"href":"/nla-action/","title":"【Blender】NLAでキャラクターが歩くモーションと移動を合成【NLAとアクション機能の使い方】","thumbnail":"/nla-action/resized/1.webp"},
-  {"href":"/mcedit-unified-tutorial/","title":"MCEditの導入と使い方 (Win11対応)","thumbnail":"/mcedit-unified-tutorial/resized/4.webp"},
-  {"href":"/ship-rig-1/","title":"【Blender】船のリグ #1","thumbnail":"/ship-rig-1/resized/7.webp"},
-  {"href":"/noise-ocean/","title":"【blender】5分で作れて軽量な海の作り方（静止画向け）","thumbnail":"/noise-ocean/resized/1.webp"},
-  {"href":"/blender-ship-wake/","title":"【blender】航跡の作り方（動かせる）","thumbnail":"/blender-ship-wake/resized/1.webp"},
-  {"href":"/whats-micra-military-dept/","title":"【いまさら訊いても遅い！】マインクラフト軍事部とは【始め方も】","thumbnail":"/whats-micra-military-dept/resized/1.webp"},
-  {"href":"/minecraft-to-blender-eevee/","title":"【blender】マインクラフトの作品をblenderで撮影する手順【eevee篇】","thumbnail":"/minecraft-to-blender-eevee/resized/1.webp"},
-  {"href":"/blender-pose-clear/","title":"【blender】ポーズをクリアユーザートランスフォームで戻せないとき","thumbnail":"/blender-pose-clear/resized/1.webp"},
-  {"href":"/ocean-modifier/","title":"【blender】海洋モディファイア（Ocean Modifier）を用いた海（動画向け）","thumbnail":"/ocean-modifier/resized/1.webp"}
+  {"href":"/eeveenext-issue/","title":"Blender 4 以降のEeveeが汚い","thumbnail":"/eeveenext-issue/resized/thumbnail.webp","cat":"CG"},
+  {"href":"/micraserver-upload/","title":"マイクラサーバーにワールドをアップロードする方法","thumbnail":"/micraserver-upload/resized/4.webp","cat":"Minecraft"},
+  {"href":"/litematica-tutorial/","title":"Litematicaの使い方","thumbnail":"/litematica-tutorial/resized/litematica_7.webp","cat":"Minecraft"},
+  {"href":"/hariboteaircraft-tutorial/","title":"はりぼてエアクラフトの導入と使い方と設定方法","thumbnail":"/hariboteaircraft-tutorial/resized/haribote-aircraft-tutorial_1.webp","cat":"Minecraft"},
+  {"href":"/nla-action/","title":"【Blender】NLAでキャラクターが歩くモーションと移動を合成【NLAとアクション機能の使い方】","thumbnail":"/nla-action/resized/1.webp","cat":"CG"},
+  {"href":"/mcedit-unified-tutorial/","title":"MCEditの導入と使い方 (Win11対応)","thumbnail":"/mcedit-unified-tutorial/resized/4.webp","cat":"Minecraft"},
+  {"href":"/ship-rig-1/","title":"【Blender】船のリグ #1","thumbnail":"/ship-rig-1/resized/7.webp","cat":"CG"},
+  {"href":"/noise-ocean/","title":"【blender】5分で作れて軽量な海の作り方（静止画向け）","thumbnail":"/noise-ocean/resized/1.webp","cat":"CG"},
+  {"href":"/blender-ship-wake/","title":"【blender】航跡の作り方（動かせる）","thumbnail":"/blender-ship-wake/resized/1.webp","cat":"CG"},
+  {"href":"/whats-micra-military-dept/","title":"【いまさら訊いても遅い！】マインクラフト軍事部とは【始め方も】","thumbnail":"/whats-micra-military-dept/resized/1.webp","cat":"Minecraft"},
+  {"href":"/minecraft-to-blender-eevee/","title":"【blender】マインクラフトの作品をblenderで撮影する手順【eevee篇】","thumbnail":"/minecraft-to-blender-eevee/resized/1.webp","cat":"CG"},
+  {"href":"/blender-pose-clear/","title":"【blender】ポーズをクリアユーザートランスフォームで戻せないとき","thumbnail":"/blender-pose-clear/resized/1.webp","cat":"CG"},
+  {"href":"/ocean-modifier/","title":"【blender】海洋モディファイア（Ocean Modifier）を用いた海（動画向け）","thumbnail":"/ocean-modifier/resized/1.webp","cat":"CG"}
 ]
